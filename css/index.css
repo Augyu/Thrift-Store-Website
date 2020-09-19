@@ -61,6 +61,7 @@ img {
 /* Product by Category */
 .category {
   padding: 16px 8px;
+  overflow: hidden;
 }
 
 .category > button:first-child {
@@ -91,6 +92,39 @@ img {
   font-size: 1em;
   font-weight: bold;
   color: var(--main-teal);
+}
+
+.main-footer {
+  padding: 32px 8px 16px 8px;
+  background: var(--main-maroon);
+  color: white;
+}
+
+.main-footer > a {
+  float: right;
+  background: transparent;
+  color: var(--main-orange);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.main-footer ol {
+  list-style-type: none;
+}
+
+.main-footer ol li {
+  margin: 4px 0;
+}
+
+.main-footer ol li a {
+  text-decoration: none;
+  color: var(--main-orange);
+  font-weight: bold;
+}
+
+.main-footer > div {
+  color: var(--main-stone);
 }
 
 @media screen and (min-width: 768px) {
