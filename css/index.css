@@ -10,6 +10,15 @@
   --main-teal: #508590;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+img {
+  display: block;
+}
+
 .main-header {
   position: fixed;
   top: 0;
@@ -39,10 +48,49 @@
   margin: 0 0 0 8px;
 }
 
-input[type='search'] {
-  width: 80vw;
+/* Advertise */
+.advertise {
+  margin: 60px 0 0 0;
+}
+
+.advertise img {
+  width: 100vw;
+  height: auto;
+}
+
+/* Product by Category */
+.category {
   padding: 16px 8px;
-  margin: 0 8px;
+}
+
+.category > button:first-child {
+  display: inline-block;
+  border: 0;
+  color: var(--main-orange);
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.category-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-list > img {
+  object-fit: cover;
+  width: calc((100% - 16px) / 2);
+  height: 180px;
+}
+
+.category button:nth-child(3) {
+  float: right;
+  border: 0;
+  margin: 4px 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--main-teal);
 }
 
 @media screen and (min-width: 768px) {
