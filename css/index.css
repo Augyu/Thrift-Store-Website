@@ -109,6 +109,7 @@ img {
 .menu-bar ol li a:hover {
   color: var(--main-stone);
   background: var(--main-orange);
+  transition: 0.5s;
 }
 
 /* Advertise */

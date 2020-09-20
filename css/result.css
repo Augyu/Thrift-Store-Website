@@ -5,8 +5,64 @@
   --main-teal: #508590;
 }
 
+/* main content */
+.container {
+  display: flex;
+}
+
+.left-container,
+.right-container {
+  display: none;
+}
+
 /* filter */
 .filter {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid var(--main-stone);
+  border-radius: 8px;
+}
+
+.filter > div:first-child {
+  font-size: 1.2rem;
+  color: var(--main-teal);
+}
+
+.filter form {
+  margin: 16px 0;
+}
+
+.filter form div {
+  margin: 8px 0;
+}
+
+div input:hover,
+div label:hover {
+  cursor: pointer;
+}
+
+.filter-submit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-submit button {
+  padding: 4px;
+  font-size: 0.8rem;
+  background: white;
+  border: 1px solid var(--main-maroon);
+  border-radius: 4px;
+  color: var(--main-maroon);
+}
+
+.filter-submit button:hover {
+  cursor: pointer;
+  color: white;
+  background: var(--main-maroon);
+}
+
+/* sorting */
+.sorting {
   margin: 66px 0 0 0;
   padding: 8px;
   display: flex;
@@ -14,10 +70,10 @@
   border-bottom: 1px solid var(--main-stone);
 }
 
-.filter span {
+.sorting span {
   font-size: 1rem;
 }
-.filter button {
+.sorting button {
   background: transparent;
   font-size: 1rem;
   border: 0;
@@ -27,6 +83,7 @@
 .product-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .product-container {
@@ -43,7 +100,7 @@
 .product-left,
 .product-right {
   float: left;
-  width: calc((100vw - 24px) / 2);
+  width: calc((100vw - 36px) / 2);
   height: 100%;
 }
 
@@ -81,19 +138,47 @@
   font-weight: bold;
 }
 
+/* advertise */
+.right-container {
+}
+.right-container img {
+  object-fit: cover;
+  width: 200px;
+  margin: 16px auto;
+}
 @media screen and (min-width: 768px) {
-  /* list of product */
-  .product-container {
-    margin: 8px 16px;
+  .left-container,
+  .right-container {
+    display: block;
+    flex: 1;
   }
+  .middle-container {
+    flex: 4;
+  }
+
+  /* sorting */
+  .sorting {
+    margin: 0;
+  }
+
+  /* list of product */
+  .product-list {
+    justify-content: space-between;
+  }
+  .product-container {
+    width: 20vw;
+    margin: 16px 0;
+  }
+
   .product-left,
   .product-right {
     float: none;
+    height: auto;
+    width: inherit;
   }
 
   .product-left a img {
     object-fit: cover;
-    width: 300px;
     height: 300px;
   }
 }
