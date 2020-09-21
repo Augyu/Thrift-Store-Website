@@ -1,0 +1,82 @@
+:root {
+  --main-maroon: #8b1f41;
+  --main-orange: #e87722;
+  --main-stone: #75787b;
+  --main-teal: #508590;
+}
+
+.breadcrum {
+  margin: 65px 0 0 0;
+  padding: 8px 8px;
+}
+
+.create-product {
+  padding: 8px 8px;
+}
+
+.create-form__left > div {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.create-form__left div label {
+  padding: 4px 0;
+  font-size: 1rem;
+}
+
+.create-form__left div input {
+  height: 1.5rem;
+  border: 1px solid var(--main-stone);
+  border-radius: 4px;
+}
+
+.create-form__left div textarea {
+  border: 1px solid var(--main-stone);
+  border-radius: 4px;
+  height: 300px;
+  font-size: 1rem;
+}
+
+/* right form */
+.create-form__right > div {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.create-form__right div label {
+  padding: 4px 0;
+  font-size: 1rem;
+}
+
+.create-form__right div button {
+  width: calc((100vw - 22px) / 2);
+  margin: 8px 0;
+  padding: 8px;
+  background-color: var(--main-stone);
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.create-form__right input[type='file'] {
+  display: none;
+}
+
+.create-form__right img {
+  object-fit: cover;
+  width: calc(100vw - 16px);
+  height: 350px;
+}
+
+.form-submit-btn {
+  font-size: 1rem;
+  background: var(--main-orange);
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px;
+  width: calc(100vw - 16px);
+}
