@@ -11,13 +11,13 @@
 }
 
 .create-product {
-  padding: 8px 8px;
+  padding: 8px 8px 32px 8px;
 }
 
 .create-form__left > div {
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  margin: 0px 0 16px 0;
 }
 
 .create-form__left div label {
@@ -79,4 +79,81 @@
   border-radius: 4px;
   padding: 8px;
   width: calc(100vw - 16px);
+}
+
+@media screen and (min-width: 768px) {
+  /* breadcrum */
+  .breadcrum {
+    margin: 0;
+    padding: 16px;
+  }
+
+  /* create product */
+  .create-product {
+    padding: 8px 16px 32px 16px;
+  }
+
+  .create-form {
+    display: flex;
+  }
+
+  .create-form__left {
+    flex: 2;
+  }
+
+  .create-form__left > div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .create-form__left > div > label {
+    width: 120px;
+  }
+
+  .create-form__left input[type='text'] {
+    width: 300px;
+    padding: 2px;
+  }
+
+  .create-form__left textarea {
+    width: 700px;
+  }
+  /* image*/
+  .create-form__right {
+    flex: 1;
+  }
+
+  .create-form__right > div {
+    margin: 0;
+  }
+
+  .create-form__right img {
+    margin: 16px 0 0 0;
+    width: 100%;
+  }
+
+  .create-form__right div button {
+    width: calc((100% - 6px) / 2);
+  }
+
+  .create-form__right div button:hover {
+    color: var(--main-stone);
+    background: var(--main-orange);
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
+  /* submit button */
+  .form-submit-btn {
+    display: block;
+    width: calc((100% - 6px) / 2);
+    margin: 32px 0 0 auto;
+  }
+
+  .form-submit-btn:hover {
+    color: white;
+    background: var(--main-maroon);
+    transition: 0.2s;
+    cursor: pointer;
+  }
 }
