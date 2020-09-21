@@ -82,10 +82,6 @@
   font-size: 1rem;
 }
 
-.create-form__right input[type='file'] {
-  display: none;
-}
-
 .create-form__right img {
   object-fit: cover;
   width: calc(100vw - 16px);
