@@ -38,6 +38,27 @@
   font-size: 1rem;
 }
 
+.create-form__left .promotion-radio {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.promotion-radio p {
+  font-size: 1rem;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.promotion-radio div {
+  width: 100%;
+  display: flex;
+}
+
+.promotion-radio input {
+  margin: 0 8px 0 0;
+}
+
 /* right form */
 .create-form__right > div {
   display: flex;
@@ -118,6 +139,16 @@
   .create-form__left textarea {
     width: 700px;
   }
+
+  /* promotion */
+  .promotion-radio p {
+    width: 120px;
+  }
+
+  .promotion-radio div {
+    width: calc((100% - 120px) / 2);
+  }
+
   /* image*/
   .create-form__right {
     flex: 1;
