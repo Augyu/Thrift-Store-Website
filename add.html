@@ -76,6 +76,15 @@
             <input type="text" id="price" name="price" />
           </div>
           <div>
+            <label for="category">Category</label>
+            <select name="sorting">
+              <option value=""></option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="sports">Sports</option>
+            </select>
+          </div>
+          <div>
             <label for="description">Description</label>
             <textarea id="description" name="description"></textarea>
           </div>
@@ -107,7 +116,10 @@
             </div>
           </div>
           <!-- post product -->
-          <button class="form-submit-btn">Post</button>
+          <button type="submit" class="form-action-btn">Post</button>
+          <a href="index.html"
+            ><button type="button" class="form-action-btn">Return</button></a
+          >
         </div>
       </form>
     </div>

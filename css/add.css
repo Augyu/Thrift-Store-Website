@@ -88,7 +88,7 @@
   height: 350px;
 }
 
-.form-submit-btn {
+.form-action-btn {
   font-size: 1rem;
   background: var(--main-orange);
   color: white;
@@ -96,6 +96,7 @@
   border-radius: 4px;
   padding: 8px;
   width: calc(100vw - 16px);
+  margin: 8px 0 0 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -171,13 +172,14 @@
   }
 
   /* submit button */
-  .form-submit-btn {
+  .form-action-btn {
+    float: right;
     display: block;
-    width: calc((100% - 6px) / 2);
-    margin: 32px 0 0 auto;
+    width: calc((100% - 12px) / 2);
+    margin: 32px 2px;
   }
 
-  .form-submit-btn:hover {
+  .form-action-btn:hover {
     color: white;
     background: var(--main-maroon);
     transition: 0.2s;
