@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/detail.css" />
     <title>Virginia Tech Thrift Store</title>
   </head>
+
   <body>
     <header>
       <div class="main-header">
@@ -36,30 +38,29 @@
         <li><a href="#">Home Decoration</a></li>
       </ol>
     </section>
-    <!-- Advertisement -->
-    <section class="advertise">
-      <img src="./image/advertisement.jpg" alt="advertisement" />
-    </section>
-    <!-- Product by Category -->
-    <section class="category">
-      <button>Electronics</button>
-      <div class="category-list">
-        <img src="./image/electronics_one.jpg" alt="product" />
-        <img src="./image/electronics_two.jpg" alt="product" />
-        <img src="./image/electronics_one.jpg" alt="product" />
-        <img src="./image/electronics_two.jpg" alt="product" />
+    <!-- product page content -->
+    <section class="container">
+      <div class="product__image">
+        <div class="product__image--large">
+          <img src="image/electronics_three.jpg" alt="image-large" />
+        </div>
+        <div class="product__image--small"></div>
       </div>
-      <button>show more</button>
-    </section>
-    <section class="category">
-      <button>Electronics</button>
-      <div class="category-list">
-        <img src="./image/electronics_one.jpg" alt="product" />
-        <img src="./image/electronics_two.jpg" alt="product" />
-        <img src="./image/electronics_one.jpg" alt="product" />
-        <img src="./image/electronics_two.jpg" alt="product" />
+      <div class="product-description">
+        <p>Airpods pro</p>
+        <p>$ 125</p>
+        <div>
+          <a href="#">David (20)</a>
+          <p>Posted an hour ago</p>
+        </div>
+        <p>
+          This is a 99% new latest Airpods pro. I've only used two times and
+          they don't fit my ears. Still have 11 months warranty. Available Time:
+          Every eveninig from Monday to Friday
+        </p>
+        <button>Add to cart</button>
+        <button>Checkout</button>
       </div>
-      <button>show more</button>
     </section>
     <!-- footer -->
     <footer class="main-footer">
