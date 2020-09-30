@@ -144,6 +144,19 @@ div label:hover {
   width: 200px;
   margin: 16px auto;
 }
+
+.no-result-container {
+  width: 100vw;
+  height: 60vh;
+  margin: 66px 0 0 0;
+  padding: 40px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-stone);
+  font-size: 1.2rem;
+}
+
 @media screen and (min-width: 768px) {
   .left-container,
   .right-container {
