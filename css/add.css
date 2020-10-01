@@ -88,6 +88,10 @@
   height: 350px;
 }
 
+.create-form__right input[type='file'] {
+  display: none;
+}
+
 .form-action-btn {
   font-size: 1rem;
   background: var(--main-orange);
