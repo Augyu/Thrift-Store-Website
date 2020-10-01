@@ -3,7 +3,7 @@ $(document).ready(function () {
 })
 
 // if users search electronics then the list will show up
-// otherwise,
+// otherwise, show no result page
 const handleSearchResult = () => {
   const queryString = new URLSearchParams(window.location.search)
   const search = queryString.get('search')
