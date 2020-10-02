@@ -24,7 +24,7 @@ const isPreviewImageSuccess = (e) => {
   if (e.target.files.length > 0) {
     const imgHolder = $('#preview-image')
     const src = URL.createObjectURL(e.target.files[0])
-    $(imgHolder).attr('src', src).css({ display: 'block' })
+    $(imgHolder).attr('src', src).css({ visibility: 'visible' })
     $(imgHolder).on('load', () => URL.revokeObjectURL(src))
     return true
   }
@@ -34,7 +34,7 @@ const isPreviewImageSuccess = (e) => {
 const isDeleteImageSuccess = () => {
   const defaultImage = './image/icon/images.svg'
   try {
-    $('#preview-image').attr('src', defaultImage).css({ display: 'none' })
+    $('#preview-image').attr('src', defaultImage).css({ visibility: 'hidden' })
     return true
   } catch (e) {
     console.log(e)
