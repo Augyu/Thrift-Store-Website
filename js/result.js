@@ -8,12 +8,12 @@ const handleSearchResult = () => {
   const queryString = new URLSearchParams(window.location.search)
   const search = queryString.get('search')
   changeSearchValue(search)
-  if (search !== 'electronics') {
+  if (search === 'electronics' || search === 'Electronics') {
+    $('.no-result-container').hide()
+  } else {
     $('.left-container').hide()
     $('.middle-container').hide()
     $('.right-container').hide()
-  } else {
-    $('.no-result-container').hide()
   }
 }
 
