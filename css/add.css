@@ -83,6 +83,7 @@
 }
 
 .create-form__right img {
+  display: none;
   object-fit: cover;
   width: calc(100vw - 16px);
   height: 350px;

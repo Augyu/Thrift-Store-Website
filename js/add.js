@@ -1,33 +1,58 @@
 $(document).ready(function () {
   // preview the image
-  $('#image').change((e) => previewImage(e))
+  $('#image').change((e) => {
+    const msg = $('<p>Upload Success!</p>')
+    isPreviewImageSuccess(e) && handleMsg(e.currentTarget, msg, true)
+  })
 
   // detele preview image
   $('.create-form__right div div button')
     .last()
     .click((e) => {
-      deleteImage(e)
+      const msg = $('<p>Delete Image!</p>')
+      isDeleteImageSuccess(e) && handleMsg(e.currentTarget, msg, false)
     })
 
   $('.create-form__right button').click((e) => e.preventDefault())
 
   // button trigger input on click
-  $('.upload').click(function () {
-    $('#image').click()
-  })
+  $('.upload').click(() => $('#image').click())
 })
 
 // the image box will change according to user's selected image
-const previewImage = (e) => {
+const isPreviewImageSuccess = (e) => {
   if (e.target.files.length > 0) {
+    const imgHolder = $('#preview-image')
     const src = URL.createObjectURL(e.target.files[0])
-    $('#preview-image').attr('src', src)
-    $('#preview-image').load(() => {
-      URL.revokeObjectURL(src)
-    })
+    $(imgHolder).attr('src', src).css({ display: 'block' })
+    $(imgHolder).on('load', () => URL.revokeObjectURL(src))
+    return true
+  }
+  return false
+}
+
+const isDeleteImageSuccess = () => {
+  const defaultImage = './image/icon/images.svg'
+  try {
+    $('#preview-image').attr('src', defaultImage).css({ display: 'none' })
+    return true
+  } catch (e) {
+    console.log(e)
+    return false
   }
 }
 
-const deleteImage = () => {
-  $('#preview-image').attr('src', '')
+const handleMsg = (target, msg, isUpload) => {
+  const color = isUpload ? '#508590' : '#CE0058'
+  $(msg)
+    .css({
+      color: color,
+      position: 'absolute',
+      borderRadius: '2px',
+      padding: '4px',
+      display: 'none'
+    })
+    .appendTo($(target).parent())
+    .fadeIn(1000)
+    .fadeOut(2000)
 }
