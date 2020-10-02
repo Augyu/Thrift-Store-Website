@@ -5,7 +5,7 @@ $(document).ready(function () {
     isPreviewImageSuccess(e) && handleMsg(e.currentTarget, msg, true)
   })
 
-  // detele preview image
+  // delete preview image
   $('.create-form__right div div button')
     .last()
     .click((e) => {
@@ -32,9 +32,8 @@ const isPreviewImageSuccess = (e) => {
 }
 
 const isDeleteImageSuccess = () => {
-  const defaultImage = './image/icon/images.svg'
   try {
-    $('#preview-image').attr('src', defaultImage).css({ visibility: 'hidden' })
+    $('#preview-image').attr('src', '#').css({ visibility: 'hidden' })
     return true
   } catch (e) {
     console.log(e)
