@@ -4,9 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
-    <link rel="stylesheet" type="text/css" href="css/list.css" />
-    <script src="js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    {% block css %} {% endblock css %}
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <title>Virginia Tech Thrift Store</title>
   </head>
 
@@ -16,7 +16,7 @@
       <div class="main-header">
         <div class="main-header__left">
           <a href="index.html"
-            ><img src="./image/logo-white.png" alt="logo"
+            ><img src="{% static 'image/logo-white.png' %}" alt="logo"
           /></a>
         </div>
         <div class="main-header__middle">
@@ -34,11 +34,11 @@
         </div>
         <div class="main-header__right">
           <a href="list.html"
-            ><img src="./image/icon/search.svg" alt="search"
+            ><img src="{% static 'image/icon/search.svg' %}" alt="search"
           /></a>
           <div class="userbar">
             <span>Hi, Tina.</span>
-            <img src="./image/icon/user.svg" alt="user" />
+            <img src="{% static 'image/icon/user.svg' %}" alt="user" />
             <div class="userbar__dropdown-content">
               <a href="#">My Account</a>
               <a href="add.html">Sell a thing</a>
@@ -46,9 +46,9 @@
             </div>
           </div>
 
-          <img src="./image/icon/cart.svg" alt="cart" />
+          <img src="{% static 'image/icon/cart.svg' %}" alt="cart" />
           <div class="hambar">
-            <img src="./image/icon/hambars.svg" alt="menu" />
+            <img src="{% static 'image/icon/hambars.svg' %}" alt="menu" />
             <div class="hambar__dropdown-content">
               <a href="#">My Account</a>
               <a href="add.html">Sell an item</a>
@@ -68,155 +68,8 @@
     </div>
     <!-- main content -->
 
-    <div class="container">
-      <!-- filter -->
-      <div class="left-container">
-        <div class="filter">
-          <div>Filter</div>
-          <form class="price">
-            <div>Price</div>
-            <div>
-              <input type="checkbox" id="price1" name="price1" />
-              <label for="price1"> $0 - $10</label>
-            </div>
-            <div>
-              <input type="checkbox" id="price2" name="price2" />
-              <label for="price2"> $10 - $100</label>
-            </div>
-            <div>
-              <input type="checkbox" id="price3" name="price3" />
-              <label for="price3"> $100 - $300</label>
-            </div>
-          </form>
-          <form class="time">
-            <div>Posted Time</div>
-            <div>
-              <input type="checkbox" id="time1" name="time1" />
-              <label for="time1"> Today</label>
-            </div>
-            <div>
-              <input type="checkbox" id="time2" name="time2" />
-              <label for="time2"> Last Week</label>
-            </div>
-            <div>
-              <input type="checkbox" id="time3" name="time3" />
-              <label for="time3"> Last Month</label>
-            </div>
-          </form>
-          <div class="filter-submit">
-            <button>Clear</button>
-            <button>Apply</button>
-          </div>
-        </div>
-      </div>
-      <div class="middle-container">
-        <!-- sorting bar -->
-        <div class="sorting">
-          <span>10 Results</span>
-          <form>
-            <label for="sorting">Sorted by</label>
-            <select name="sorting">
-              <option value="popular">Most Popular</option>
-              <option value="relevant">Most Relevant</option>
-              <option value="time">Most Recent</option>
-            </select>
-          </form>
-        </div>
-        <!-- List of product -->
-        <div class="product-list">
-          <div class="product-container">
-            <!-- product pictuer on the left, description on the right -->
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_three.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Airpod pro</p>
-              <p>$325</p>
-              <p>I've only used this Airpod pro twice...</p>
-              <a href="#">David (20)</a>
-              <p>posted an hour ago</p>
-            </div>
-          </div>
-          <div class="product-container">
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_one.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Amazon Alexa</p>
-              <p>$25</p>
-              <p>Want to buy Google Home. Don't need this anymore.</p>
-              <a href="#">David</a>
-              <p>posted 30 minutes ago</p>
-            </div>
-          </div>
-          <div class="product-container">
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_two.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Air fryer</p>
-              <p>$25</p>
-              <p>Moving out this area...</p>
-              <a href="#">Jeff (2)</a>
-              <p>posted one day ago</p>
-            </div>
-          </div>
-          <div class="product-container">
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_three.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Airpod pro</p>
-              <p>$325</p>
-              <p>I've only used this Airpod pro twice...</p>
-              <a href="#">David (20)</a>
-              <p>posted an hour ago</p>
-            </div>
-          </div>
-          <div class="product-container">
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_one.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Amazon Alexa</p>
-              <p>$25</p>
-              <p>Want to buy Google Home. Don't need this anymore.</p>
-              <a href="#">David</a>
-              <p>posted an hour ago</p>
-            </div>
-          </div>
-          <div class="product-container">
-            <div class="product-left">
-              <a href="detail.html"
-                ><img src="./image/electronics_two.jpg" alt="snapshot"
-              /></a>
-            </div>
-            <div class="product-right">
-              <p>Air fryer</p>
-              <p>$25</p>
-              <p>Moving out this area...</p>
-              <a href="#">Han (120)</a>
-              <p>posted an hour ago</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- advertise -->
-      <div class="right-container">
-        <img src="image/advertisement.jpg" alt="advertisement" />
-        <img src="image/advertisement.jpg" alt="advertisement" />
-      </div>
-    </div>
+    {% block container %} {% endblock container %}
+
     <!-- footer -->
     <footer class="main-footer">
       <a href="#">Back to top &uarr;</a>
