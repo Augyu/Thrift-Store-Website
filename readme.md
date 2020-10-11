@@ -1,5 +1,7 @@
-# User Interface Project
+# A Thrift Store Website
 
-### Image Source
+Using Django / Bootstrap / JQuery
+
+### Icon Source
 
 - [Font Awsome](https://fontawesome.com/)
