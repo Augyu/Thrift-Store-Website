@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'thrifts/css/detail.css' %}"
+/>
+{% endblock css %} {% block container %}
+<div class="product-container">
+  <div class="product__image">
+    <div class="product__image--large">
+      <img src="{% static 'image/electronics_three.jpg' %}" alt="image-large" />
+    </div>
+    <div class="product__image--small">
+      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
+      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
+      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
+    </div>
+  </div>
+  <div class="product__description">
+    <p>Airpods pro</p>
+    <p>$ 125</p>
+    <div>
+      <a href="{% url 'thrifts:list' %}">David (20)</a>
+      <p>Posted an hour ago</p>
+    </div>
+    <p>
+      This is a 99% new latest Airpods pro. I've only used two times and they
+      don't fit my ears. Still have 11 months warranty. Available Time: Every
+      eveninig from Monday to Friday
+    </p>
+    <button id="add-cart">Add to cart</button>
+    <button id="checkout">Checkout</button>
+  </div>
+  <div class="seller">
+    <div class="comment">
+      <div>
+        <a>Sharon</a>
+        <span>2019-12-12</span>
+      </div>
+      <p>David cleaned the product before he sold it.</p>
+    </div>
+    <div class="comment">
+      <div>
+        <a>Jenny</a>
+        <span>2019-10-20</span>
+      </div>
+      <p>David responses very fast.</p>
+    </div>
+    <div class="comment">
+      <div>
+        <a>Tim</a>
+        <span>2018-12-12</span>
+      </div>
+      <p>I would loved to buy things from David again.</p>
+    </div>
+    <div class="comment">
+      <div>
+        <a>Frank</a>
+        <span>2011-12-12</span>
+      </div>
+      <p>Really cheap things!</p>
+    </div>
+  </div>
+</div>
+{% endblock container %}

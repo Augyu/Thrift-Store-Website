@@ -15,7 +15,7 @@
     <header>
       <div class="main-header">
         <div class="main-header__left">
-          <a href="index.html"
+          <a href="{% url 'thrifts:list' %}"
             ><img src="{% static 'image/logo-white.png' %}" alt="logo"
           /></a>
         </div>
@@ -33,7 +33,7 @@
           </form>
         </div>
         <div class="main-header__right">
-          <a href="list.html"
+          <a href="{% url 'thrifts:list' %}"
             ><img src="{% static 'image/icon/search.svg' %}" alt="search"
           /></a>
           <div class="userbar">
@@ -60,10 +60,10 @@
     </header>
     <div class="menu-bar">
       <ol>
-        <li><a href="list.html">Electonics</a></li>
-        <li><a href="list.html">Fashion</a></li>
-        <li><a href="list.html">Sports</a></li>
-        <li><a href="list.html">Home Decoration</a></li>
+        <li><a href="{% url 'thrifts:list' %}">Electonics</a></li>
+        <li><a href="{% url 'thrifts:list' %}">Fashion</a></li>
+        <li><a href="{% url 'thrifts:list' %}">Sports</a></li>
+        <li><a href="{% url 'thrifts:list' %}">Home Decoration</a></li>
       </ol>
     </div>
     <!-- main content -->

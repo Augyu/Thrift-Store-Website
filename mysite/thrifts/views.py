@@ -11,3 +11,8 @@ def index(request):
 def list(request):
     template = loader.get_template('thrifts/list.html')
     return HttpResponse(template.render())
+
+
+def detail(request):
+    template = loader.get_template('thrifts/detail.html')
+    return HttpResponse(template.render())
