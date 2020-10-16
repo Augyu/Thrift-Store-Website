@@ -1,10 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block css %}
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
 <link
   rel="stylesheet"
   type="text/css"
   href="{% static 'thrifts/css/list.css' %}"
 />
-{% endblock css %} {% block container %}
+{% endblock css %}
+
+{% block container %}
 <div class="container">
   <!-- filter -->
   <div class="left-container">
@@ -61,23 +67,25 @@
     </div>
     <!-- List of product -->
     <div class="product-list">
+
       {% for product in products %}
       <div class="product-container">
         <!-- product pictuer on the left, description on the right -->
         <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img src="{% static product.img %}" alt="snapshot"
+          <a href="{% url 'thrifts:detail' product.id %}"
+            ><img src="{% static product.img.0 %}" alt="snapshot"
           /></a>
         </div>
         <div class="product-right">
-          <p>{{product.name}}</p>
-          <p>$ {{product.price}}</p>
-          <p>I've only used this Airpod pro twice...</p>
-          <a href="#">David (20)</a>
-          <p>posted an hour ago</p>
+          <p>{{ product.name }}</p>
+          <p>$ {{ product.price }}</p>
+          <p>{{ product.description | truncatewords:15 }}</p>
+          <a href="#">{{ product.seller }} (20)</a>
+          <p>{{ product.date_posted | naturaltime }}</p>
         </div>
       </div>
       {% endfor %}
+
     </div>
   </div>
   <!-- advertise -->

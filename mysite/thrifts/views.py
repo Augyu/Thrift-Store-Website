@@ -8,13 +8,16 @@ from .models import products
 def index(request):
     return HttpResponse("Hello, world. You're at the app index.")
 
-
 def list(request):
-    template = loader.get_template('thrifts/list.html')
     context = {'products': products}
-    print(products)
+    for product in products:
+        print(product.img[0])
     return render(request, 'thrifts/list.html', context)
 
-def detail(request):
-    template = loader.get_template('thrifts/detail.html')
-    return HttpResponse(template.render())
+def detail(request, product_id):
+    context = {}
+    for product in products:
+        if product.getProductById(product_id):
+            context = {'product': product}
+            break
+    return render(request, 'thrifts/detail.html', context)

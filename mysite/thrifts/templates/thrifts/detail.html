@@ -1,66 +1,53 @@
-{% extends 'base.html' %} {% load static %} {% block css %}
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
 <link
   rel="stylesheet"
   type="text/css"
   href="{% static 'thrifts/css/detail.css' %}"
 />
 <script src="{% static 'thrifts/js/detail.js' %}"></script>
-{% endblock css %} {% block container %}
+{% endblock css %}
+
+{% block container %}
 <div class="product-container">
   <div class="product__image">
     <div class="product__image--large">
-      <img src="{% static 'image/electronics_three.jpg' %}" alt="image-large" />
+      <img src="{% static product.img.0 %}" alt="image-large" />
     </div>
     <div class="product__image--small">
-      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
-      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
-      <img src="{% static 'image/electronics_four.jpg' %}" alt="image-small" />
+      <img src="{% static product.img.0 %}" alt="image-small" />
+      <img src="{% static product.img.0 %}" alt="image-small" />
+      <img src="{% static product.img.0 %}" alt="image-small" />
     </div>
   </div>
   <div class="product__description">
-    <p>Airpods pro</p>
-    <p>$ 125</p>
+    <p>{{ product.name }}</p>
+    <p>$ {{ product.price }}</p>
     <div>
-      <a href="{% url 'thrifts:list' %}">David (20)</a>
-      <p>Posted an hour ago</p>
+      <a href="{% url 'thrifts:list' %}">{{ product.seller }} (20)</a>
+      <p>{{ product.date_posted | naturaltime }}</p>
     </div>
     <p>
-      This is a 99% new latest Airpods pro. I've only used two times and they
-      don't fit my ears. Still have 11 months warranty. Available Time: Every
-      eveninig from Monday to Friday
+      {{ product.description }}
     </p>
     <button id="add-cart">Add to cart</button>
     <button id="checkout">Checkout</button>
   </div>
   <div class="seller">
+    
+  {% for comment in product.comments %}
     <div class="comment">
       <div>
-        <a>Sharon</a>
-        <span>2019-12-12</span>
+        <a>{{ comment.buyer }}</a>
+        <span>{{ comment.date_posted | naturaltime }}</span>
       </div>
-      <p>David cleaned the product before he sold it.</p>
+      <p>{{ comment.comment }}</p>
     </div>
-    <div class="comment">
-      <div>
-        <a>Jenny</a>
-        <span>2019-10-20</span>
-      </div>
-      <p>David responses very fast.</p>
-    </div>
-    <div class="comment">
-      <div>
-        <a>Tim</a>
-        <span>2018-12-12</span>
-      </div>
-      <p>I would loved to buy things from David again.</p>
-    </div>
-    <div class="comment">
-      <div>
-        <a>Frank</a>
-        <span>2011-12-12</span>
-      </div>
-      <p>Really cheap things!</p>
-    </div>
+  {% endfor %}
+
   </div>
 </div>
 {% endblock container %}
