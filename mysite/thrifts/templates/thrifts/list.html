@@ -61,95 +61,23 @@
     </div>
     <!-- List of product -->
     <div class="product-list">
+      {% for product in products %}
       <div class="product-container">
         <!-- product pictuer on the left, description on the right -->
         <div class="product-left">
           <a href="{% url 'thrifts:detail' %}"
-            ><img
-              src="{% static 'image/electronics_three.jpg' %}"
-              alt="snapshot"
+            ><img src="{% static product.img %}" alt="snapshot"
           /></a>
         </div>
         <div class="product-right">
-          <p>Airpod pro</p>
-          <p>$325</p>
+          <p>{{product.name}}</p>
+          <p>$ {{product.price}}</p>
           <p>I've only used this Airpod pro twice...</p>
           <a href="#">David (20)</a>
           <p>posted an hour ago</p>
         </div>
       </div>
-      <div class="product-container">
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img src="{% static 'image/electronics_one.jpg' %}" alt="snapshot"
-          /></a>
-        </div>
-        <div class="product-right">
-          <p>Amazon Alexa</p>
-          <p>$25</p>
-          <p>Want to buy Google Home. Don't need this anymore.</p>
-          <a href="#">David</a>
-          <p>posted 30 minutes ago</p>
-        </div>
-      </div>
-      <div class="product-container">
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img src="{% static 'image/electronics_two.jpg' %}" alt="snapshot"
-          /></a>
-        </div>
-        <div class="product-right">
-          <p>Air fryer</p>
-          <p>$25</p>
-          <p>Moving out this area...</p>
-          <a href="#">Jeff (2)</a>
-          <p>posted one day ago</p>
-        </div>
-      </div>
-      <div class="product-container">
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img
-              src="{% static 'image/electronics_three.jpg' %}"
-              alt="snapshot"
-          /></a>
-        </div>
-        <div class="product-right">
-          <p>Airpod pro</p>
-          <p>$325</p>
-          <p>I've only used this Airpod pro twice...</p>
-          <a href="#">David (20)</a>
-          <p>posted an hour ago</p>
-        </div>
-      </div>
-      <div class="product-container">
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img src="{% static 'image/electronics_one.jpg' %}" alt="snapshot"
-          /></a>
-        </div>
-        <div class="product-right">
-          <p>Amazon Alexa</p>
-          <p>$25</p>
-          <p>Want to buy Google Home. Don't need this anymore.</p>
-          <a href="#">David</a>
-          <p>posted an hour ago</p>
-        </div>
-      </div>
-      <div class="product-container">
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' %}"
-            ><img src="{% static 'image/electronics_two.jpg' %}" alt="snapshot"
-          /></a>
-        </div>
-        <div class="product-right">
-          <p>Air fryer</p>
-          <p>$25</p>
-          <p>Moving out this area...</p>
-          <a href="#">Han (120)</a>
-          <p>posted an hour ago</p>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
   <!-- advertise -->
