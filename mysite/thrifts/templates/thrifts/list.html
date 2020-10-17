@@ -3,11 +3,7 @@
 {% load humanize %}
 
 {% block css %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'thrifts/css/list.css' %}"
-/>
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/list.css' %}" />
 {% endblock css %}
 
 {% block container %}
@@ -72,9 +68,7 @@
       <div class="product-container">
         <!-- product pictuer on the left, description on the right -->
         <div class="product-left">
-          <a href="{% url 'thrifts:detail' product.id %}"
-            ><img src="{% static product.img.0 %}" alt="snapshot"
-          /></a>
+          <a href="{% url 'thrifts:detail' product.id %}"><img src="{% static product.img.0 %}" alt="snapshot" /></a>
         </div>
         <div class="product-right">
           <p>{{ product.name }}</p>

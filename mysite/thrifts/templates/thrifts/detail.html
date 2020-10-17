@@ -3,11 +3,7 @@
 {% load humanize %}
 
 {% block css %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'thrifts/css/detail.css' %}"
-/>
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/detail.css' %}" />
 <script src="{% static 'thrifts/js/detail.js' %}"></script>
 {% endblock css %}
 
@@ -37,8 +33,8 @@
     <button id="checkout">Checkout</button>
   </div>
   <div class="seller">
-    
-  {% for comment in product.comments %}
+
+    {% for comment in product.comments %}
     <div class="comment">
       <div>
         <a>{{ comment.buyer }}</a>
@@ -46,7 +42,7 @@
       </div>
       <p>{{ comment.comment }}</p>
     </div>
-  {% endfor %}
+    {% endfor %}
 
   </div>
 </div>

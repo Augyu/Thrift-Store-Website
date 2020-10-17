@@ -40,3 +40,6 @@ def detail(request, product_id):
             context = {'product': product}
             break
     return render(request, 'thrifts/detail.html', context)
+
+def sell(request):
+    return render(request, 'thrifts/add.html')
