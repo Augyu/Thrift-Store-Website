@@ -2,9 +2,13 @@
 {% load static %}
 
 {% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+  integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/add.css' %}" />
 {% endblock css %}
 {% block container %}
+
+{% if  request.session.username %}
 <div class="breadcrum">
   <a href="{% url 'thrifts:home' %}">My Account</a>
   <span>></span>
@@ -64,5 +68,10 @@
       <a href="index.html"><button type="button" class="form-action-btn">Return</button></a>
     </div>
   </form>
+</div>
+{% endif %}
+<div class="container vh-100">
+  <h3>You do not have access to this page.</h3>
+  <a href="{% url 'thrifts:home' %}">Login</a> to have explore more stuffs!
 </div>
 {% endblock container %}

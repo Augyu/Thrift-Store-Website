@@ -45,6 +45,8 @@ comment4 = Comment('Really cheap things!',
 comments = [comment1, comment2, comment3, comment4]
 
 products = []
+fake_selling_list = []
+
 for i in range(1, 20):
     if i % 3 == 1:
         product = Product(i,
@@ -75,9 +77,13 @@ for i in range(1, 20):
             comments)
     
     products.append(product)
+    if i < 4:
+        fake_selling_list.append(product)
 
-    fakeuser = {'username': "user1", 'password': "password"}
-    admin = {"username": "admin", "password": "password"}
+fakeuser = {'username': "user1", 'password': "password"}
+fakeadmin = {'username': "admin", 'password': "password"}
+
+
     
 
 

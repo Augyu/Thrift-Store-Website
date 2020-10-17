@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
-from .models import products, fakeuser
+from .models import products, fakeuser, fake_selling_list, fakeadmin
 # Create your views here.
 
 
@@ -9,17 +9,21 @@ def index(request):
     return HttpResponse("Hello, world. You're at the app index.")
 
 def home(request):
-    return render(request, 'thrifts/home.html')
+    context = {'selling_list': fake_selling_list}
+    print(context)
+    return render(request, 'thrifts/home.html', context)
 
 def login(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
+    
     if username == fakeuser['username'] and password == fakeuser['password']:
         request.session['username'] = username
         request.session['role'] = 'regular'
-        return render(request, 'thrifts/home.html')
-    else:
-        return render(request, 'thrifts/home.html')
+    elif username == fakeadmin['username'] and password == fakeadmin['password']:
+        request.session['username'] = username
+        request.session['role'] = 'admin'
+    return redirect('thrifts:home')
 
 def logout(request):
     try:

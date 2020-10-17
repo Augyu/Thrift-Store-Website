@@ -38,7 +38,7 @@
           <div class="userbar__dropdown-content">
 
             {% if request.session.username %}
-            <a href="#">My Account</a>
+            <a href="{% url 'thrifts:home' %}">My Account</a>
             <a href="{% url 'thrifts:sell' %}">Sell a thing</a>
             <a href="{% url 'thrifts:logout' %}">Logout</a>
             {% else %}
@@ -89,5 +89,6 @@
     <div>Copyright &copy; Virginia Tech Thrift Store</div>
   </footer>
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
 
 </html>

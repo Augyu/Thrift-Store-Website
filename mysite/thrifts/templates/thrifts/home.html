@@ -1,18 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block css %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
-      integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/home.css' %}" />
 {% endblock css %}
 {% block container %}
 
-
+<!-- if the user login, show the dashboard -->
 {% if  request.session.username %}
 <div class="container py-5 dashboard-container">
-  You can see your dashboard.
+  <div class="row pt-5 pt-md-0">
+    <div class="col-sm-12 col-md-6 selling-list-container">
+      <!-- title of the list stuffs -->
+      {% if request.session.role == 'admin' %}
+      <h4>Total Listed Stuffs.</h4>
+      {% elif request.session.role == 'regular' %}
+      <h4>Your Listed Stuffs.</h4>
+      {% endif %}
+
+      <!-- single stuffs -->
+      {% for selling in selling_list %}
+      <section class="selling container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <img src="{% static selling.img.0 %}" alt="selling-snapshot">
+          </div>
+          <div class="col-6">
+            <h4>{{ selling.name }}</h4>
+            <h4>$ {{selling.price }}</h4>
+            <p>{{ selling.date_posted | naturaltime }}</p>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-secondary">Edit</button>
+            {% if request.session.role == 'admin' %}
+            <button type="button" class="btn btn-danger" data-toggle="modal"
+              data-target="#confirmDeleteModal">Delete</button>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      {% endfor %}
+
+    </div>
+    <div class="col-sm-12 col-md-6"></div>
+  </div>
 </div>
+
+
+<!-- if the user does not login, show the login box -->
 {% else %}
 <div class="container py-5 login-container">
   <div class="row pt-5 pt-md-0">
@@ -39,8 +75,23 @@
   </div>
 </div>
 {% endif %}
-  
-
-
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you really want to delete this product?</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        The action can not be undo.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Delete
+        </button>
+        <button type="button" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock container %}
-    
