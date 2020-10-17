@@ -5,7 +5,7 @@ from . import views
 app_name = 'thrifts'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('user/', views.user, name='user'),
+    path('home/', views.home, name='home'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name="logout"),
     path('product/', views.list, name='list'),

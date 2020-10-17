@@ -238,8 +238,9 @@ img {
   font-weight: bold;
 }
 
-.main-footer ol {
+.main-footer > ol {
   list-style-type: none;
+  padding: 0;
 }
 
 .main-footer ol li {

@@ -8,8 +8,8 @@ from .models import products, fakeuser
 def index(request):
     return HttpResponse("Hello, world. You're at the app index.")
 
-def user(request):
-    return render(request, 'thrifts/user.html')
+def home(request):
+    return render(request, 'thrifts/home.html')
 
 def login(request):
     username = request.POST.get("username")
@@ -17,9 +17,9 @@ def login(request):
     if username == fakeuser['username'] and password == fakeuser['password']:
         request.session['username'] = username
         request.session['role'] = 'regular'
-        return redirect('thrifts:list')
+        return render(request, 'thrifts/home.html')
     else:
-        return render(request, 'thrifts/user.html')
+        return render(request, 'thrifts/home.html')
 
 def logout(request):
     try:
@@ -27,7 +27,7 @@ def logout(request):
         del request.session['role']
     except KeyError:
         pass   
-    return redirect('thrifts:user')
+    return redirect('thrifts:home')
 
 def list(request):
     context = {'products': products}
