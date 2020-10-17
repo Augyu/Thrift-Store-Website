@@ -76,5 +76,9 @@ for i in range(1, 20):
     
     products.append(product)
 
+    fakeuser = {'username': "user1", 'password': "password"}
+    admin = {"username": "admin", "password": "password"}
+    
+
 
 

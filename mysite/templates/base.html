@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,12 +38,22 @@
             ><img src="{% static 'image/icon/search.svg' %}" alt="search"
           /></a>
           <div class="userbar">
-            <span>Hi, Tina.</span>
+            {% if request.session.username %}
+              <span>Hi, {{ request.session.username }}.</span>
+            {% else %}
+              <span>Hi, Guest.</span>
+            {% endif %}
             <img src="{% static 'image/icon/user.svg' %}" alt="user" />
-            <div class="userbar__dropdown-content">
-              <a href="#">My Account</a>
-              <a href="add.html">Sell a thing</a>
-              <a href="index.html">Logout</a>
+            <div class="userbar__dropdown-content">      
+
+              {% if request.session.username %}
+                <a href="#">My Account</a>
+                <a href="add.html">Sell a thing</a>
+                <a href="{% url 'thrifts:logout' %}">Logout</a>
+              {% else %}
+                <a href="{% url 'thrifts:user' %}">Login</a>
+              {% endif %} 
+
             </div>
           </div>
 
