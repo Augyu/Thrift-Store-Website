@@ -14,31 +14,31 @@
   padding: 8px 8px 32px 8px;
 }
 
-.create-form__left > div {
+.edit-form__left > div {
   display: flex;
   flex-direction: column;
   margin: 0px 0 16px 0;
 }
 
-.create-form__left div label {
+.edit-form__left div label {
   padding: 4px 0;
   font-size: 1rem;
 }
 
-.create-form__left div input {
+.edit-form__left div input {
   height: 1.5rem;
   border: 1px solid var(--main-stone);
   border-radius: 4px;
 }
 
-.create-form__left div textarea {
+.edit-form__left div textarea {
   border: 1px solid var(--main-stone);
   border-radius: 4px;
   height: 300px;
   font-size: 1rem;
 }
 
-.create-form__left .promotion-radio {
+.edit-form__left .promotion-radio {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -60,18 +60,18 @@
 }
 
 /* right form */
-.create-form__right > div {
+.edit-form__right > div {
   display: flex;
   flex-direction: column;
   margin: 16px 0;
 }
 
-.create-form__right div label {
+.edit-form__right div label {
   padding: 4px 0;
   font-size: 1rem;
 }
 
-.create-form__right div button {
+.edit-form__right div button {
   width: calc((100vw - 22px) / 2);
   margin: 8px 0;
   padding: 8px;
@@ -82,14 +82,14 @@
   font-size: 1rem;
 }
 
-.create-form__right img {
-  visibility: hidden;
+.edit-form__right img {
+  visibility: visible;
   object-fit: cover;
   width: calc(100vw - 16px);
   height: 350px;
 }
 
-.create-form__right input[type='file'] {
+.edit-form__right input[type='file'] {
   display: none;
 }
 
@@ -122,29 +122,29 @@ a.form-action-btn {
     padding: 8px 16px 32px 16px;
   }
 
-  .create-form {
+  .edit-form {
     display: flex;
   }
 
-  .create-form__left {
+  .edit-form__left {
     flex: 2;
   }
 
-  .create-form__left > div {
+  .edit-form__left > div {
     display: flex;
     flex-direction: row;
   }
 
-  .create-form__left > div > label {
+  .edit-form__left > div > label {
     width: 120px;
   }
 
-  .create-form__left input[type='text'] {
+  .edit-form__left input[type='text'] {
     width: 300px;
     padding: 2px;
   }
 
-  .create-form__left textarea {
+  .edit-form__left textarea {
     width: 700px;
   }
 
@@ -158,24 +158,24 @@ a.form-action-btn {
   }
 
   /* image*/
-  .create-form__right {
+  .edit-form__right {
     flex: 1;
   }
 
-  .create-form__right > div {
+  .edit-form__right > div {
     margin: 0;
   }
 
-  .create-form__right img {
+  .edit-form__right img {
     margin: 24px 0;
     width: 100%;
   }
 
-  .create-form__right div button {
+  .edit-form__right div button {
     width: calc((100% - 6px) / 2);
   }
 
-  .create-form__right div button:hover {
+  .edit-form__right div button:hover {
     color: var(--main-stone);
     background: var(--main-orange);
     transition: 0.2s;

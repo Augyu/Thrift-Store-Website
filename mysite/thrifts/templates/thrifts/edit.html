@@ -2,8 +2,10 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/add.css' %}" />
-<script src="{% static 'thrifts/js/add.js' %}"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+  integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/edit.css' %}" />
+<script src="{% static 'thrifts/js/edit.js' %}"></script>
 {% endblock css %}
 {% block container %}
 
@@ -16,16 +18,16 @@
 <!-- create product -->
 <div class="create-product">
   <!-- product form -->
-  <form class="create-form" action="{% url 'thrifts:home' %}" method="POST">
+  <form class="edit-form" action="{% url 'thrifts:home' %}" method="POST">
     {% csrf_token %}
-    <div class="create-form__left">
+    <div class="edit-form__left">
       <div>
         <label for="product">Product</label>
-        <input type="text" id="product" name="product" placeholder="Airpods pro" />
+        <input type="text" id="product" name="product" placeholder="Airpods pro" value="{{ product.name }}" />
       </div>
       <div>
         <label for="price">Price</label>
-        <input type="text" id="price" name="price" placeholder="30" />
+        <input type="text" id="price" name="price" placeholder="30" value="{{ product.price }}" />
       </div>
       <div>
         <label for="category">Category</label>
@@ -38,7 +40,8 @@
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea id="description" name="description" placeholder="The condition of your item."></textarea>
+        <textarea id="description" name="description" placeholder="The condition of your item."
+          value="{{ product.description }}"></textarea>
       </div>
       <div class="promotion-radio">
         <p>Promotion</p>
@@ -52,7 +55,7 @@
         </div>
       </div>
     </div>
-    <div class="create-form__right">
+    <div class="edit-form__right">
       <!-- image upload -->
       <div>
         <label for="image">Image</label>
@@ -61,7 +64,7 @@
           <button class="upload">Upload</button>
           <button>Delete</button>
         </div>
-        <img src="#" alt="upload image" id="preview-image" />
+        <img src="{% static product.img.0 %}" alt="upload image" id="preview-image" />
       </div>
       <!-- post product -->
       <input type="submit" class="form-action-btn">

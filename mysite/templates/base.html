@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
   <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
   {% block css %} {% endblock css %}
   <title>Virginia Tech Thrift Store</title>
 </head>
@@ -17,7 +18,7 @@
   <header>
     <div class="main-header">
       <div class="main-header__left">
-        <a href="{% url 'thrifts:list' %}"><img src="{% static 'image/logo-white.png' %}" alt="logo" /></a>
+        <a href="{% url 'thrifts:home' %}"><img src="{% static 'image/logo-white.png' %}" alt="logo" /></a>
       </div>
       <div class="main-header__middle">
         <form action="result.html" method="get">

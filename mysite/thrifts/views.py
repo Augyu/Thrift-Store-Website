@@ -16,7 +16,7 @@ def home(request):
 def login(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
-    
+
     if username == fakeuser['username'] and password == fakeuser['password']:
         request.session['username'] = username
         request.session['role'] = 'regular'
@@ -44,6 +44,13 @@ def detail(request, product_id):
             context = {'product': product}
             break
     return render(request, 'thrifts/detail.html', context)
+
+def edit(request, product_id):
+    for product in products:
+        if product.getProductById(product_id):
+            context = {'product': product}
+            break
+    return render(request, 'thrifts/edit.html', context)
 
 def sell(request):
     return render(request, 'thrifts/add.html')

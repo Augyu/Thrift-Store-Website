@@ -136,13 +136,15 @@ img {
 /* Menu-bar */
 .menu-bar {
   display: none;
-  margin: 66px 0 0 0;
+  margin: 68px 0 0 0;
 }
 
 .menu-bar ol {
   list-style-type: none;
   overflow: hidden;
   background-color: var(--main-stone);
+  margin: 0;
+  padding: 0;
 }
 
 .menu-bar ol li {

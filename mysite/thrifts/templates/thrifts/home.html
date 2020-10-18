@@ -32,7 +32,7 @@
             <p>{{ selling.date_posted | naturaltime }}</p>
           </div>
           <div class="col-3">
-            <button class="btn btn-secondary">Edit</button>
+            <a href="{% url 'thrifts:edit' selling.id %}"><button class="btn btn-secondary">Edit</button></a>
             {% if request.session.role == 'admin' %}
             <button type="button" class="btn btn-danger" data-toggle="modal"
               data-target="#confirmDeleteModal">Delete</button>
