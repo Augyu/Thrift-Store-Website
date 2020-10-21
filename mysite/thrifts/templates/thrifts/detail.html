@@ -32,6 +32,9 @@
     <button id="add-cart">Add to cart</button>
     <button id="checkout">Checkout</button>
   </div>
+
+
+  {% if request.session.username %}
   <div class="seller">
 
     {% for comment in product.comments %}
@@ -42,8 +45,14 @@
       </div>
       <p>{{ comment.comment }}</p>
     </div>
-    {% endfor %}
 
+    {% endfor %}
+    {% else %}
+    <div class="seller">
+      Login to see more comments.
+    </div>
+    {% endif %}
   </div>
+
 </div>
 {% endblock container %}
