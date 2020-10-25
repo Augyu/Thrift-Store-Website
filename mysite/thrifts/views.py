@@ -10,7 +10,16 @@ def index(request):
 
 
 def home(request):
-    context = {'selling_list': fake_selling_list}
+    selling_list = Product.objects.all()
+
+    # if (request.session['role'] == 'admin'):
+    #     selling_list = Product.objects.all()
+
+    # elif (request.session['role'] == 'regualr'):
+    #     selling_list = Product.objects.filter(
+    #         seller=request.session['username'])
+
+    context = {'selling_list': selling_list}
 
     return render(request, 'thrifts/home.html', context)
 
@@ -38,16 +47,15 @@ def logout(request):
 
 
 def list(request):
+    products = Product.objects.all()
+
     context = {'products': products}
     return render(request, 'thrifts/list.html', context)
 
 
 def detail(request, product_id):
-    context = {}
-    for product in products:
-        if product.getProductById(product_id):
-            context = {'product': product}
-            break
+    product = Product.objects.filter(pk=product_id)
+    context = {'product': product}
     return render(request, 'thrifts/detail.html', context)
 
 
@@ -59,6 +67,11 @@ def edit(request, product_id):
     return render(request, 'thrifts/edit.html', context)
 
 
+def delete(request, product_id):
+    Product.objects.filter(pk=product_id).delete()
+    return render(request, 'thrifts/home.html')
+
+
 def sell(request):
     if request.method == "POST":
         name = request.POST.get('product_name')
@@ -66,7 +79,7 @@ def sell(request):
         description = request.POST.get('description')
         category = request.POST.get('category')
         image = request.FILES.get('image')
-        seller = request.session.username
+        seller = request.session['username']
         product = Product(name=name, price=price, img=image,
                           description=description, category=category, seller=seller)
         product.save()
