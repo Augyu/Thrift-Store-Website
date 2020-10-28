@@ -11,12 +11,12 @@
 <div class="product-container">
   <div class="product__image">
     <div class="product__image--large">
-      <img src="{% static product.img.0 %}" alt="image-large" />
+      <img src="{{ product.img.url }}" alt="image-large" />
     </div>
     <div class="product__image--small">
-      <img src="{% static product.img.0 %}" alt="image-small" />
-      <img src="{% static product.img.0 %}" alt="image-small" />
-      <img src="{% static product.img.0 %}" alt="image-small" />
+      <img src="{{ product.img.url }}" alt="image-small" />
+      <img src="{{ product.img.url }}" alt="image-small" />
+      <img src="{{ product.img.url }}" alt="image-small" />
     </div>
   </div>
   <div class="product__description">
@@ -37,7 +37,7 @@
   {% if request.session.username %}
   <div class="seller">
 
-    {% for comment in product.comments %}
+    {% for comment in comments %}
     <div class="comment">
       <div>
         <a>{{ comment.buyer }}</a>

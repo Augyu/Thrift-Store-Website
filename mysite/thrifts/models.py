@@ -19,6 +19,7 @@ class Product(models.Model):
 class Comment(models.Model):
     buyer = models.CharField(max_length=200)
     seller = models.CharField(max_length=200)
+    comment = models.TextField(blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
 
 # class Product():

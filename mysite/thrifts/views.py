@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import loader
-from .models import products, fakeuser, fake_selling_list, fakeadmin, Product
+from .models import products, fakeuser, fake_selling_list, fakeadmin, Product, Comment
 # Create your views here.
 
 
@@ -10,16 +10,16 @@ def index(request):
 
 
 def home(request):
-    selling_list = Product.objects.all()
+    selling_list = []
+    if (request.session.get('role') == 'admin'):
+        selling_list = Product.objects.all()
 
-    # if (request.session['role'] == 'admin'):
-    #     selling_list = Product.objects.all()
-
-    # elif (request.session['role'] == 'regualr'):
-    #     selling_list = Product.objects.filter(
-    #         seller=request.session['username'])
+    elif (request.session.get('role') == 'regular'):
+        selling_list = Product.objects.filter(
+            seller=request.session['username'])
 
     context = {'selling_list': selling_list}
+    print(selling_list)
 
     return render(request, 'thrifts/home.html', context)
 
@@ -54,16 +54,15 @@ def list(request):
 
 
 def detail(request, product_id):
-    product = Product.objects.filter(pk=product_id)
-    context = {'product': product}
+    product = Product.objects.get(pk=product_id)
+    comments = Comment.objects.filter(seller=product.seller)
+    context = {'product': product, 'comments': comments}
     return render(request, 'thrifts/detail.html', context)
 
 
 def edit(request, product_id):
-    for product in products:
-        if product.getProductById(product_id):
-            context = {'product': product}
-            break
+    product = Product.objects.get(pk=product_id)
+    context = {'product': product}
     return render(request, 'thrifts/edit.html', context)
 
 
