@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import loader
+from django.contrib import messages
 from .models import products, fakeuser, fake_selling_list, fakeadmin, Product, Comment
 # Create your views here.
 
@@ -79,6 +80,7 @@ def edit(request, product_id):
             if image:
                 product.img = image
             product.save()
+            messages.success(request, 'You successfully edited %s' % name)
             return redirect('thrifts:home')
 
         return render(request, 'thrifts/edit.html', context)
@@ -87,10 +89,10 @@ def edit(request, product_id):
 
 
 def delete(request, product_id):
-    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
-    if is_ajax and request.method == 'POST':
+    if is_ajax(request) and request.method == 'POST':
         try:
             Product.objects.get(pk=product_id).delete()
+            messages.success(request, 'You successfully deleted the product.')
             return JsonResponse({'success': 'success'}, status=200)
         except Product.DoesNotExist:
             return JsonResponse({'error': 'No product found'}, status=200)
@@ -110,6 +112,11 @@ def sell(request):
         product = Product(name=name, price=price, img=image,
                           description=description, category=category, seller=seller)
         product.save()
+        messages.success(request, 'You successfully added %s' % name)
         return redirect('thrifts:home')
 
     return render(request, 'thrifts/add.html')
+
+
+def is_ajax(request):
+    return request.headers.get('x-requested-with') == 'XMLHttpRequest'

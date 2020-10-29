@@ -259,6 +259,10 @@ img {
   color: var(--main-stone);
 }
 
+.message {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .main-header__middle input[type='text'] {
     display: block;
@@ -327,5 +331,27 @@ img {
 
   .main-footer a:hover {
     color: var(--main-teal);
+  }
+
+  .message {
+    display: block;
+    position: fixed;
+    padding: 10px 4px 10px 8px;
+    right: 10px;
+    bottom: 100px;
+    animation: 2.5s slide;
+    color: white;
+    border-radius: 4px;
+    background-color: #4bb543;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+@keyframes slide {
+  from {
+    max-width: 10px;
+  }
+  to {
+    max-width: 100%;
   }
 }

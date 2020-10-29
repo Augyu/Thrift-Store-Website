@@ -30,8 +30,9 @@
 }
 
 @media screen and (min-width: 768px) {
-  .login-container {
-    height: 65vh;
+  .login-container,
+  .dashboard-container {
+    min-height: 75vh;
   }
 
   .selling img {

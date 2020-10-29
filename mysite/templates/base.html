@@ -89,6 +89,19 @@
     </ol>
     <div>Copyright &copy; Virginia Tech Thrift Store</div>
   </footer>
+
+  <!-- message -->
+
+  {% if messages %}
+  <div class="message">
+    {% for message in messages %}
+    <span>{{ message }}</span>
+    <button class="btn">X</button>
+    {% endfor %}
+  </div>
+
+  {% endif %}
+
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
 
