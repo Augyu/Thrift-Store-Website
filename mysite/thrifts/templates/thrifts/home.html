@@ -4,6 +4,7 @@
 {% block css %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/home.css' %}" />
+<script src="{% static 'thrifts/js/home.js' %}"></script>
 {% endblock css %}
 {% block container %}
 
@@ -21,7 +22,7 @@
 
       <!-- single stuffs -->
       {% for selling in selling_list %}
-      <section class="selling container-fluid">
+      <section class="selling container-fluid" data-delete-url="{% url 'thrifts:delete' selling.id %}">
         <div class="row">
           <div class="col-3">
             <img src="{{ selling.img.url }} " alt="selling-snapshot">
@@ -34,7 +35,7 @@
           <div class="col-3">
             <a href="{% url 'thrifts:edit' selling.id %}"><button class="btn btn-secondary">Edit</button></a>
             {% if request.session.role == 'admin' %}
-            <button type="button" class="btn btn-danger" data-toggle="modal"
+            <button type="button" class="btn btn-danger selling-delete" data-toggle="modal"
               data-target="#confirmDeleteModal">Delete</button>
             {% endif %}
           </div>
@@ -75,7 +76,7 @@
   </div>
 </div>
 {% endif %}
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" data-url="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -86,7 +87,7 @@
         The action can not be undo.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">
+        <button type="button" class="btn btn-danger selling-delete__confirm" data-dismiss="modal">
           Delete
         </button>
         <button type="button" class="btn btn-secondary">Close</button>

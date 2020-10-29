@@ -61,14 +61,41 @@ def detail(request, product_id):
 
 
 def edit(request, product_id):
-    product = Product.objects.get(pk=product_id)
-    context = {'product': product}
-    return render(request, 'thrifts/edit.html', context)
+    try:
+        product = Product.objects.get(pk=product_id)
+        context = {'product': product}
+
+        if request.method == "POST":
+            name = request.POST.get('product_name')
+            price = request.POST.get('price')
+            description = request.POST.get('description')
+            category = request.POST.get('category')
+            image = request.FILES.get('image')
+            print(category)
+            product.name = name
+            product.price = price
+            product.description = description
+            product.category = category
+            if image:
+                product.img = image
+            product.save()
+            return redirect('thrifts:home')
+
+        return render(request, 'thrifts/edit.html', context)
+    except Product.DoesNotExist:
+        return render(request, 'thrifts/home.html')
 
 
 def delete(request, product_id):
-    Product.objects.filter(pk=product_id).delete()
-    return render(request, 'thrifts/home.html')
+    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+    if is_ajax and request.method == 'POST':
+        try:
+            Product.objects.get(pk=product_id).delete()
+            return JsonResponse({'success': 'success'}, status=200)
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'No product found'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
 def sell(request):
@@ -79,6 +106,7 @@ def sell(request):
         category = request.POST.get('category')
         image = request.FILES.get('image')
         seller = request.session['username']
+        print(category)
         product = Product(name=name, price=price, img=image,
                           description=description, category=category, seller=seller)
         product.save()
