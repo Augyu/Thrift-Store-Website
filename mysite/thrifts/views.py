@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
 from .models import products, fakeuser, fake_selling_list, fakeadmin, Product, Comment
-# Create your views here.
 
 
 def home(request):
@@ -96,7 +95,7 @@ def delete(request, product_id):
     else:
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
-#  add view
+# this is the add item page
 
 
 def sell(request):
@@ -114,6 +113,8 @@ def sell(request):
         return redirect('thrifts:detail', product.id)
 
     return render(request, 'thrifts/add.html')
+
+# check if the request is ajax
 
 
 def is_ajax(request):

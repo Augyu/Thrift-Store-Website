@@ -21,10 +21,9 @@ function deleteSelling() {
       headers: { 'X-CSRFToken': csrftoken }
     })
       .done(function (json) {
-        const $delete = $('.selling').filter(function () {
-          return $(this).data('delete-url') == url
-        })
-        $delete.remove()
+        if (json.success) {
+          location.reload()
+        }
       })
       .fail(function (xhr, status, errorThrown) {})
       .always(function (xhr, status) {})

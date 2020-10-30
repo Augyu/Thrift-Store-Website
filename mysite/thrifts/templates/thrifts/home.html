@@ -33,6 +33,7 @@
           </div>
           <div class="col-3">
             <a href="{% url 'thrifts:edit' selling.id %}"><button class="btn btn-secondary">Edit</button></a>
+            <!-- if loggin by admin, admin can delete an item -->
             {% if request.session.role == 'admin' %}
             <button type="button" class="btn btn-danger selling-delete" data-toggle="modal"
               data-target="#confirmDeleteModal">Delete</button>
