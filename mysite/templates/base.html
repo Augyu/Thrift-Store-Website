@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
   <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+  <script src="{% static 'js/base.js' %}"></script>
 
   {% block css %} {% endblock css %}
   <title>Virginia Tech Thrift Store</title>
@@ -91,14 +92,14 @@
   </footer>
 
   <!-- message -->
-
   {% if messages %}
-  <div class="message">
-    {% for message in messages %}
+  {% for message in messages %}
+  <div class="message" data-level="{{ message.tags }}">
     <span>{{ message }}</span>
-    <button class="btn">X</button>
-    {% endfor %}
+    <button class="btn message-close">X</button>
   </div>
+  {% endfor %}
+
 
   {% endif %}
 

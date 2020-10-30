@@ -48,10 +48,12 @@ def logout(request):
 
 
 def list(request):
-    products = Product.objects.all()
-
-    context = {'products': products}
-    return render(request, 'thrifts/list.html', context)
+    sorting_type = request.GET.get('sorting')
+    if sorting_type:
+        products = Product.objects.all().order_by(sorting_type)
+    else:
+        products = Product.objects.all()
+    return render(request, 'thrifts/list.html', {'products': products})
 
 
 def detail(request, product_id):
@@ -80,7 +82,7 @@ def edit(request, product_id):
             if image:
                 product.img = image
             product.save()
-            messages.success(request, 'You successfully edited %s' % name)
+            messages.info(request, 'You successfully edited %s' % name)
             return redirect('thrifts:home')
 
         return render(request, 'thrifts/edit.html', context)
@@ -92,7 +94,7 @@ def delete(request, product_id):
     if is_ajax(request) and request.method == 'POST':
         try:
             Product.objects.get(pk=product_id).delete()
-            messages.success(request, 'You successfully deleted the product.')
+            messages.warning(request, 'You successfully deleted the product.')
             return JsonResponse({'success': 'success'}, status=200)
         except Product.DoesNotExist:
             return JsonResponse({'error': 'No product found'}, status=200)

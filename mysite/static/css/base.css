@@ -342,8 +342,18 @@ img {
     animation: 2.5s slide;
     color: white;
     border-radius: 4px;
-    background-color: #4bb543;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .message[data-level='success'] {
+    background-color: #4bb543;
+  }
+
+  .message[data-level='info'] {
+    background-color: royalblue;
+  }
+  .message[data-level='warning'] {
+    background-color: orangered;
   }
 }
 

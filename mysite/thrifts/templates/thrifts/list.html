@@ -4,6 +4,7 @@
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/list.css' %}" />
+<script src="{% static 'thrifts/js/list.js' %}"></script>
 {% endblock css %}
 
 {% block container %}
@@ -31,7 +32,7 @@
         <div>Posted Time</div>
         <div>
           <input type="checkbox" id="time1" name="time1" />
-          <label for="time1"> Today</label>
+          <label for="time1"> Today</label>ing
         </div>
         <div>
           <input type="checkbox" id="time2" name="time2" />
@@ -54,16 +55,17 @@
       <span>10 Results</span>
       <form>
         <label for="sorting">Sorted by</label>
-        <select name="sorting">
-          <option value="popular">Most Popular</option>
-          <option value="relevant">Most Relevant</option>
-          <option value="time">Most Recent</option>
+        <select name="sorting" id="product-sorting" data-url="{% url 'thrifts:list' %}">
+          <option value=""></option>
+          <option value="price">Cheapest</option>
+          <option value="date_posted">Most Recent</option>
         </select>
       </form>
     </div>
     <!-- List of product -->
     <div class="product-list">
 
+      {% if products %}
       {% for product in products %}
       <div class="product-container">
         <!-- product pictuer on the left, description on the right -->
@@ -79,6 +81,14 @@
         </div>
       </div>
       {% endfor %}
+
+      {% else %}
+      <div class="product-container">
+        There is no product right now. Come back later!
+      </div>
+      {% endif %}
+
+
 
     </div>
   </div>

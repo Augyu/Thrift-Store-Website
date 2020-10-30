@@ -1,9 +1,16 @@
 $(document).ready(function () {
+  setDeleteModalId()
+  deleteSelling()
+})
+
+function setDeleteModalId() {
   $('.selling').on('click', '.selling-delete', function () {
     var url = $('.selling').data('delete-url')
     $('#confirmDeleteModal').data('url', url)
   })
+}
 
+function deleteSelling() {
   $('#confirmDeleteModal').on('click', '.selling-delete__confirm', function () {
     var url = $('#confirmDeleteModal').data('url')
     $.ajax({
@@ -22,7 +29,7 @@ $(document).ready(function () {
       .fail(function (xhr, status, errorThrown) {})
       .always(function (xhr, status) {})
   })
-})
+}
 
 function getCookie(name) {
   let cookieValue = null
