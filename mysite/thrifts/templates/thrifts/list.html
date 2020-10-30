@@ -8,94 +8,101 @@
 {% endblock css %}
 
 {% block container %}
-<div class="container">
-  <!-- filter -->
-  <div class="left-container">
-    <div class="filter">
-      <div>Filter</div>
-      <form class="price">
-        <div>Price</div>
-        <div>
-          <input type="checkbox" id="price1" name="price1" />
-          <label for="price1"> $0 - $10</label>
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- filter -->
+    <div class="col-md-2">
+      <div class="left-container">
+        <div class="filter">
+          <div>Filter</div>
+          <form class="price">
+            <div>Price</div>
+            <div>
+              <input type="checkbox" id="price1" name="price1" />
+              <label for="price1"> $0 - $10</label>
+            </div>
+            <div>
+              <input type="checkbox" id="price2" name="price2" />
+              <label for="price2"> $10 - $100</label>
+            </div>
+            <div>
+              <input type="checkbox" id="price3" name="price3" />
+              <label for="price3"> $100 - $300</label>
+            </div>
+          </form>
+          <form class="time">
+            <div>Posted Time</div>
+            <div>
+              <input type="checkbox" id="time1" name="time1" />
+              <label for="time1"> Today</label>ing
+            </div>
+            <div>
+              <input type="checkbox" id="time2" name="time2" />
+              <label for="time2"> Last Week</label>
+            </div>
+            <div>
+              <input type="checkbox" id="time3" name="time3" />
+              <label for="time3"> Last Month</label>
+            </div>
+          </form>
+          <div class="filter-submit">
+            <button>Clear</button>
+            <button>Apply</button>
+          </div>
         </div>
-        <div>
-          <input type="checkbox" id="price2" name="price2" />
-          <label for="price2"> $10 - $100</label>
-        </div>
-        <div>
-          <input type="checkbox" id="price3" name="price3" />
-          <label for="price3"> $100 - $300</label>
-        </div>
-      </form>
-      <form class="time">
-        <div>Posted Time</div>
-        <div>
-          <input type="checkbox" id="time1" name="time1" />
-          <label for="time1"> Today</label>ing
-        </div>
-        <div>
-          <input type="checkbox" id="time2" name="time2" />
-          <label for="time2"> Last Week</label>
-        </div>
-        <div>
-          <input type="checkbox" id="time3" name="time3" />
-          <label for="time3"> Last Month</label>
-        </div>
-      </form>
-      <div class="filter-submit">
-        <button>Clear</button>
-        <button>Apply</button>
       </div>
     </div>
-  </div>
-  <div class="middle-container">
-    <!-- sorting bar -->
-    <div class="sorting">
-      <span>10 Results</span>
-      <form>
-        <label for="sorting">Sorted by</label>
-        <select name="sorting" id="product-sorting" data-url="{% url 'thrifts:list' %}">
-          <option value=""></option>
-          <option value="price">Cheapest</option>
-          <option value="date_posted">Most Recent</option>
-        </select>
-      </form>
-    </div>
-    <!-- List of product -->
-    <div class="product-list">
 
-      {% if products %}
-      {% for product in products %}
-      <div class="product-container">
-        <!-- product pictuer on the left, description on the right -->
-        <div class="product-left">
-          <a href="{% url 'thrifts:detail' product.id %}"><img src="{{ product.img.url }} " alt="snapshot" /></a>
+    <div class="col-md-8 col-sm-12">
+      <div class="middle-container">
+        <!-- sorting bar -->
+        <div class="sorting">
+          <span>10 Results</span>
+          <form>
+            <label for="sorting">Sorted by</label>
+            <select name="sorting" id="product-sorting" data-url="{% url 'thrifts:list' %}">
+              <option value=""></option>
+              <option value="price">Cheapest</option>
+              <option value="date_posted">Most Recent</option>
+            </select>
+          </form>
         </div>
-        <div class="product-right">
-          <p>{{ product.name }}</p>
-          <p>$ {{ product.price }}</p>
-          <p>{{ product.description | truncatewords:15 }}</p>
-          <a href="#">{{ product.seller }} (20)</a>
-          <p>{{ product.date_posted | naturaltime }}</p>
+
+        <!-- List of product -->
+        <div class="product-list mb-3">
+          {% if products %}
+          {% for product in products %}
+          <div class="product-container">
+            <!-- product pictuer on the left, description on the right -->
+            <div class="product-left">
+              <a href="{% url 'thrifts:detail' product.id %}"><img src="{{ product.img.url }} " alt="snapshot" /></a>
+            </div>
+            <div class="product-right">
+              <span>{{ product.name }}</span>
+              <span>$ {{ product.price }}</span>
+              <span>{{ product.description | truncatewords:15 }}</span>
+              <a href="#">{{ product.seller }} (20)</a>
+              <span>{{ product.date_posted | naturaltime }}</span>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          <div class="product-container">
+            There is no product right now. Come back later!
+          </div>
+          {% endif %}
         </div>
       </div>
-      {% endfor %}
-
-      {% else %}
-      <div class="product-container">
-        There is no product right now. Come back later!
-      </div>
-      {% endif %}
-
-
-
     </div>
-  </div>
-  <!-- advertise -->
-  <div class="right-container">
-    <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
-    <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
+
+    <!-- advertise -->
+    <div class="col-md-2">
+      <div class="right-container">
+        <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
+        <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
+      </div>
+    </div>
   </div>
 </div>
 {% endblock container %}

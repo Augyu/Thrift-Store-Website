@@ -24,7 +24,8 @@
         <a href="{% url 'thrifts:home' %}"><img src="{% static 'image/logo-white.png' %}" alt="logo" /></a>
       </div>
       <div class="main-header__middle">
-        <form action="result.html" method="get">
+        <form action="{% url 'thrifts:list' %}" method="get">
+          {% csrf_token %}
           <label for="search-middle"></label>
           <input type="text" placeholder="Search for goods" id="search-middle" name="search" required />
           <input type="submit" value="" />
