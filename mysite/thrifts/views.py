@@ -6,10 +6,6 @@ from .models import products, fakeuser, fake_selling_list, fakeadmin, Product, C
 # Create your views here.
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the app index.")
-
-
 def home(request):
     selling_list = []
     if (request.session.get('role') == 'admin'):
@@ -74,7 +70,6 @@ def edit(request, product_id):
             description = request.POST.get('description')
             category = request.POST.get('category')
             image = request.FILES.get('image')
-            print(category)
             product.name = name
             product.price = price
             product.description = description
@@ -101,6 +96,8 @@ def delete(request, product_id):
     else:
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
+#  add view
+
 
 def sell(request):
     if request.method == "POST":
@@ -110,12 +107,11 @@ def sell(request):
         category = request.POST.get('category')
         image = request.FILES.get('image')
         seller = request.session['username']
-        print(category)
         product = Product(name=name, price=price, img=image,
                           description=description, category=category, seller=seller)
         product.save()
         messages.success(request, 'You successfully added %s' % name)
-        return redirect('thrifts:home')
+        return redirect('thrifts:detail', product.id)
 
     return render(request, 'thrifts/add.html')
 

@@ -186,7 +186,7 @@ a.form-action-btn {
   .form-action-btn {
     float: right;
     display: block;
-    width: calc((100% - 12px) / 2);
+    width: calc((100% - 24px) / 2);
     margin: 32px 2px;
   }
 
