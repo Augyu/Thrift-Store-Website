@@ -26,7 +26,7 @@ class Comment(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     class Meta:
-        ordering = ['date_posted']
+        ordering = ['-date_posted']
 
 
 # comment1 = Comment('David cleaned the product before he sold it.',
