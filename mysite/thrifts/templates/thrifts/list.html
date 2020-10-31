@@ -58,7 +58,7 @@
       <div class="middle-container">
         <!-- sorting bar -->
         <div class="sorting">
-          <span>10 Results</span>
+          <span>{{ products.count }} Results</span>
           <form>
             <label for="sorting">Sorted by</label>
             <select name="sorting" id="product-sorting" data-url="{% url 'thrifts:list' %}">

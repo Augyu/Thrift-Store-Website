@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
-from .models import products, fakeuser, fake_selling_list, fakeadmin, Product, Comment
+from .models import fakeadmin, Product, Comment
 
 
 def home(request):
