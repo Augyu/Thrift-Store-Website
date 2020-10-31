@@ -1,5 +1,6 @@
 $(document).ready(function () {
   handleLeaveComment()
+  getCommentNumber()
 })
 
 function handleLeaveComment() {
@@ -8,26 +9,51 @@ function handleLeaveComment() {
     const comment = $('#leave_comment').val()
     const data = { comment: comment }
     var url = $(this).data('url')
+    if (comment) {
+      $.ajax({
+        url: url,
+        data: data,
+        type: 'POST',
+        dataType: 'json',
+        headers: { 'X-CSRFToken': csrftoken }
+      })
+        .done(function (json) {
+          if (json.success) {
+            const data = json.data
+            $('#leave_comment').val('')
+            $('.comment-container').prepend(
+              '<div class="comment"><div><a>' +
+                data.buyer +
+                '</a><span>' +
+                data.date_posted +
+                '</span></div><p>' +
+                data.comment +
+                '</p></div>'
+            )
+          }
+        })
+        .fail(function (xhr, status, errorThrown) {})
+        .always(function (xhr, status) {})
+    }
+  })
+}
+
+function getCommentNumber() {
+  $('.total-comment-btn').on('click', function (event) {
+    event.preventDefault()
+
+    var url = $(this).data('url')
     $.ajax({
       url: url,
-      data: data,
-      type: 'POST',
+      data: '',
+      type: 'GET',
       dataType: 'json',
       headers: { 'X-CSRFToken': csrftoken }
     })
       .done(function (json) {
         if (json.success) {
           const data = json.data
-          $('#leave_comment').val('')
-          $('.comment-container').prepend(
-            '<div class="comment"><div><a>' +
-              data.buyer +
-              '</a><span>' +
-              data.date_posted +
-              '</span></div><p>' +
-              data.comment +
-              '</p></div>'
-          )
+          $('.total-comment').text(data.number)
         }
       })
       .fail(function (xhr, status, errorThrown) {})

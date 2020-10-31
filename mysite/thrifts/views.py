@@ -135,5 +135,13 @@ def leave_comment(request, seller):
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
+def get_num_of_comment(request, seller):
+    if is_ajax and request.method == "GET":
+        number = len(Comment.objects.filter(seller=seller))
+        return JsonResponse({'success': 'success', 'data': {'number': number}}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+
+
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
