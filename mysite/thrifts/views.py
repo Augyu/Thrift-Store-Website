@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import fakeadmin, Product, Comment
 
 
@@ -15,8 +16,6 @@ def home(request):
             seller=request.session['username'])
 
     context = {'selling_list': selling_list}
-    print(selling_list)
-
     return render(request, 'thrifts/home.html', context)
 
 
@@ -115,6 +114,25 @@ def sell(request):
     return render(request, 'thrifts/add.html')
 
 # check if the request is ajax
+
+
+def seller(request, seller):
+    comments = Comment.objects.filter(seller=seller)
+    return render(request, 'thrifts/seller.html', {'comments': comments, 'name': seller})
+
+
+def leave_comment(request, seller):
+    if is_ajax and request.method == "POST":
+        comment = request.POST.get('comment')
+        seller = request.session['username']
+        comment = Comment(comment=comment, seller=seller, buyer=seller)
+        comment.save()
+        return JsonResponse({'success': 'success',
+                             'data': {'seller': comment.seller, 'buyer': comment.buyer,
+                                      'comment': comment.comment, 'date_posted': naturaltime(comment.date_posted)}},
+                            status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
 def is_ajax(request):

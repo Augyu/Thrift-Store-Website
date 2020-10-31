@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'thrifts/css/detail.css' %}" />
+<script src="{% static 'thrifts/js/seller.js' %}"></script>
+{% endblock css %}
+
+
+{% block container %}
+{% if request.session.username %}
+<div class="container min-vh-100 py-3">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">{{name}}</div>
+        <div class="col-sm-12 col-md-6">
+            <div class="leave-comment-container d-flex py-3">
+                {% csrf_token %}
+                <input type="text" class="w-100" id="leave_comment" name="leave_comment"
+                    placeholder="Leave a comment" />
+                <button class="btn btn-secondary" data-url="{% url 'thrifts:comment' name %}">Send</button>
+            </div>
+            <div class="comment-container">
+                {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <a>{{ comment.buyer }}</a>
+                        <span>{{ comment.date_posted | naturaltime }}</span>
+                    </div>
+                    <p>{{ comment.comment }}</p>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container vh-100">
+    Login to see more.
+</div>
+{% endif %}
+{% endblock container %}

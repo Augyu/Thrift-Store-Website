@@ -25,6 +25,9 @@ class Comment(models.Model):
     comment = models.TextField(blank=True)
     date_posted = models.DateTimeField(auto_now_add=True, auto_now=False)
 
+    class Meta:
+        ordering = ['date_posted']
+
 
 # comment1 = Comment('David cleaned the product before he sold it.',
 #                    'Jenny',
