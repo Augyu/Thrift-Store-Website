@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from .models import fakeadmin, Product, Comment
+from .models import fakeadmin, Product, Comment, fakeuser
 
 
 def home(request):
