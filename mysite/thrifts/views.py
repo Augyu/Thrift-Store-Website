@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from .models import fakeadmin, Product, Comment, fakeuser
+from .models import Product, Comment
 
 
 def home(request):
@@ -17,28 +17,6 @@ def home(request):
 
     context = {'selling_list': selling_list}
     return render(request, 'thrifts/home.html', context)
-
-
-def login(request):
-    username = request.POST.get("username")
-    password = request.POST.get("password")
-
-    if username == fakeuser['username'] and password == fakeuser['password']:
-        request.session['username'] = username
-        request.session['role'] = 'regular'
-    elif username == fakeadmin['username'] and password == fakeadmin['password']:
-        request.session['username'] = username
-        request.session['role'] = 'admin'
-    return redirect('thrifts:home')
-
-
-def logout(request):
-    try:
-        del request.session['username']
-        del request.session['role']
-    except KeyError:
-        pass
-    return redirect('thrifts:home')
 
 
 def list(request):

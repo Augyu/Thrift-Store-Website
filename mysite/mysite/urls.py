@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', lambda req: redirect('thrifts/')),
     path('thrifts/', include('thrifts.urls', namespace='thrifts')),
+    path('users/', include('users.urls', namespace="users")),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
