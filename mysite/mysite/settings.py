@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.urls import reverse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'thrifts.apps.ThriftsConfig',
     'users.apps.UsersConfig',
+    'feeds.apps.FeedsConfig',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +135,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse('users:profile', args=[u.username]),
+}

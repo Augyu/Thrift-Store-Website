@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import Product, Comment
+from feeds.models import Feed
 
 
 def home(request):
@@ -16,7 +17,8 @@ def home(request):
         selling_list = Product.objects.filter(
             seller=request.session['username'])
 
-    context = {'selling_list': selling_list}
+    feeds = Feed.objects.order_by('-created_time')[:10]
+    context = {'selling_list': selling_list, "feeds": feeds}
     return render(request, 'thrifts/home.html', context)
 
 
@@ -89,11 +91,12 @@ def sell(request):
                           description=description, category=category, seller=seller, user=user)
         product.save()
         messages.success(request, 'You successfully added %s' % name)
+        # log the feed
+        feed = Feed(user=user, verb='created a new product.', target=product)
+        feed.save()
         return redirect('thrifts:detail', product.id)
 
     return render(request, 'thrifts/add.html')
-
-# check if the request is ajax
 
 
 def seller(request, seller):
@@ -121,6 +124,8 @@ def get_num_of_comment(request, seller):
         return JsonResponse({'success': 'success', 'data': {'number': number}}, status=200)
     else:
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+
+# check if the request is ajax
 
 
 def is_ajax(request):

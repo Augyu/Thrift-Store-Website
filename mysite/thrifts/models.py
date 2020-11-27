@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -19,6 +20,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('thrifts:detail', args=[self.id])
 
 
 class Comment(models.Model):
