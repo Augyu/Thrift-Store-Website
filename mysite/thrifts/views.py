@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import Product, Comment
 
@@ -83,8 +84,9 @@ def sell(request):
         category = request.POST.get('category')
         image = request.FILES.get('image')
         seller = request.session['username']
+        user = User.objects.get(username=request.session.get('username'))
         product = Product(name=name, price=price, img=image,
-                          description=description, category=category, seller=seller)
+                          description=description, category=category, seller=seller, user=user)
         product.save()
         messages.success(request, 'You successfully added %s' % name)
         return redirect('thrifts:detail', product.id)

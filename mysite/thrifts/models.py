@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -10,6 +11,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     seller = models.CharField(max_length=200)
     category = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -28,23 +30,6 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-date_posted']
 
-
-# comment1 = Comment('David cleaned the product before he sold it.',
-#                    'Jenny',
-#                    'David',
-#                    datetime(2020, 9, 10))
-# comment2 = Comment('I would loved to buy things from David again.',
-#                    'Frank',
-#                    'David',
-#                    datetime(2020, 4, 5))
-# comment3 = Comment('David cleaned the product before he sold it.',
-#                    'Sharon',
-#                    'David',
-#                    datetime(2019, 3, 2))
-# comment4 = Comment('Really cheap things!',
-#                    'Tim',
-#                    'David',
-#                    datetime(2016, 12, 24))
 
 fakeuser = {'username': "David", 'password': "password"}
 fakeadmin = {'username': "admin", 'password': "password"}

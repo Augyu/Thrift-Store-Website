@@ -80,9 +80,9 @@
             </div>
             <div class="product-right">
               <span>{{ product.name }}</span>
-              <span>$ {{ product.price }}</span>
+              <span>${{ product.price }}</span>
               <span>{{ product.description | truncatewords:15 }}</span>
-              <a href="#">{{ product.seller }} (20)</a>
+              <a href="{% url 'users:profile' product.user.username %}">{{ product.user.username }} (20)</a>
               <span>{{ product.date_posted | naturaltime }}</span>
             </div>
           </div>
