@@ -26,7 +26,7 @@ SECRET_KEY = 'rasskxtq-x9vyxgcc63uz_buc$*#%yq!m47gs_3zmng%a)mb=='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://thrifts-app.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
