@@ -1,2 +1,6 @@
 .DS_Store
+.vscode
+.gitignore
 mysite/media/**
+mysite/venv/**
+mysite/.gitignore
