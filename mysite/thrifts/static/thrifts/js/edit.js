@@ -36,7 +36,6 @@ const isDeleteImageSuccess = () => {
     $('#preview-image').attr('src', '#').css({ visibility: 'hidden' })
     return true
   } catch (e) {
-    console.log(e)
     return false
   }
 }

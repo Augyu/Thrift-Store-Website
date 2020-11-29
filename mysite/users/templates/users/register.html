@@ -3,7 +3,8 @@
 
 
 {% block css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/register.css' %}" />
+<script src="{% static 'users/js/register.js' %}"></script>
 {% endblock css %}
 
 
@@ -15,17 +16,52 @@
       {% csrf_token %}
       <div class="form-group my-3">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" placeholder="Enter username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        <span class="error-message" id='username-error'></span>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group my-3">
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" id="fName" name="fName" placeholder="Enter your first name"
+              required>
+            <span class="error-message" id='fName-error'></span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group my-3">
+            <label for="lName">Last Name</label>
+            <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter your last name" required>
+            <span class="error-message" id='lName-error'></span>
+
+          </div>
+        </div>
+      </div>
+      <div class="form-group my-3">
+        <label for="birth">Birth date</label>
+        <input type="date" class="form-control" id="birth" name="birth" required>
+        <span class="error-message" id='birth-error'></span>
       </div>
       <div class="form-group my-3">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" name="email" placeholder="Enter email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+        <span class="error-message" id='email-error'></span>
       </div>
       <div class="form-group my-3">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <span class="error-message" id='password-error'></span>
+        <!-- "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters -->
       </div>
-      <button type="submit" class="btn btn-secondary">Sign Up</button>
+      <div class="form-group my-3">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+          placeholder="Enter your password again" required>
+        <span class="error-message" id='confirmPassword-error'></span>
+      </div>
+      <button type="submit" class="btn btn-secondary" id="signUpBtn" data-url="{% url 'users:register' %}">Sign
+        Up</button>
       <a href="{% url 'thrifts:home' %}" class=" btn btn-success">Log In</a>
     </form>
   </div>

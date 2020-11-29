@@ -33,7 +33,3 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-date_posted']
-
-
-fakeuser = {'username': "David", 'password': "password"}
-fakeadmin = {'username': "admin", 'password': "password"}
