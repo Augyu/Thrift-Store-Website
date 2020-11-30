@@ -9,7 +9,6 @@
 {% block container %}
 {% if request.session.role == 'admin' %}
 <div class="container py-5">
-
   <table class="table">
     <thead>
       <tr>
@@ -39,7 +38,7 @@
 </div>
 {% else %}
 <div class="container vh-100">
-  Login to see more.
+  You have no permission.
 </div>
 {% endif %}
 {% endblock container %}

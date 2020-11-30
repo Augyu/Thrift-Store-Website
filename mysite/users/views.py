@@ -18,8 +18,6 @@ def register(request):
         birth = request.POST.get('birth')
         user = User.objects.create_user(
             username, email, password, first_name=first_name, last_name=last_name)
-        # messages.add_message(request, messages.SUCCESS,
-        #                      'Hi %s! You successfully registered' % user.username)
         detail = Details.objects.get(user_id=user.id)
         detail.birth = datetime.strptime(birth, '%Y-%m-%d')
         detail.save()
@@ -30,9 +28,30 @@ def register(request):
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
+def edit(request, username):
+    if request.method == 'POST':
+        if is_ajax:
+            user = User.objects.get(username=username)
+            user.first_name = request.POST.get('fName')
+            user.last_name = request.POST.get('lName')
+            user.email = request.POST.get('email')
+            user.details.birth = request.POST.get('birth')
+            user.save()
+            return JsonResponse({'success': 'success', 'data': {'url': reverse('users:profile', args=[username])}}, status=200)
+        else:
+            return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+    else:
+        user = User.objects.get(username=username)
+        birth = user.details.birth
+        birth = birth.strftime("%Y-%m-%d")
+        return render(request, 'users/edit.html', {'user': user, 'birth': birth})
+
+
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    return render(request, 'users/profile.html', {'user': user})
+    birth = user.details.birth
+    birth = birth.strftime("%Y-%m-%d")
+    return render(request, 'users/profile.html', {'user': user, 'birth': birth})
 
 
 def login_user(request):

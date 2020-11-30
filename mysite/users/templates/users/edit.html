@@ -1,49 +1,58 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load humanize %}
+
 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/register.css' %}" />
+<script src="{% static 'users/js/register.js' %}"></script>
 {% endblock css %}
+
 
 {% block container %}
 <div class="container-md py-5">
     <div class="register-container">
-        <h3>{{user.username}}'s Profile Page</h3>
+        <h3>Edit your account</h3>
         <form id="register-user" action="{% url 'users:register' %}" method="POST">
             {% csrf_token %}
             <div class="form-group my-3">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" value="{{user.username}}"
                     disabled>
+                <span class="error-message" id='username-error'></span>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group my-3">
                         <label for="fName">First Name</label>
                         <input type="text" class="form-control" id="fName" name="fName"
-                            placeholder="Enter your first name" value="{{user.first_name}}" disabled>
+                            placeholder="Enter your first name" value="{{user.first_name}}" required>
+                        <span class="error-message" id='fName-error'></span>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group my-3">
                         <label for="lName">Last Name</label>
                         <input type="text" class="form-control" id="lName" name="lName"
-                            placeholder="Enter your last name" value="{{user.last_name}}" disabled>
+                            placeholder="Enter your last name" value="{{user.last_name}}" required>
+                        <span class="error-message" id='lName-error'></span>
+
                     </div>
                 </div>
             </div>
             <div class="form-group my-3">
                 <label for="birth">Birth date</label>
-                <input type="date" class="form-control" id="birth" name="birth" value="{{birth}}" disabled>
+                <input type="date" class="form-control" id="birth" name="birth" value="{{birth}}" required>
+                <span class="error-message" id='birth-error'></span>
             </div>
             <div class="form-group my-3">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
-                    value="{{user.email}}" disabled>
+                    value="{{user.email}}" required>
+                <span class="error-message" id='email-error'></span>
             </div>
-            {% if request.session.username == user.username  or request.session.role == 'admin'%}
-            <a href="{% url 'users:edit' user.username %}" class="btn btn-danger">Edit profile</a>
-            {% endif %}
+            <button type="submit" class="btn btn-secondary" id="signUpBtn"
+                data-url="{% url 'users:edit' user.username %}">Save</button>
+            <a href="{% url 'users:profile' user.username %}" class=" btn btn-success">Return</a>
         </form>
     </div>
 </div>
