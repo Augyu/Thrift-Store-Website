@@ -7,8 +7,6 @@ from .models import Details
 from datetime import datetime
 from django.urls import reverse
 
-# Create your views here.
-
 
 def register(request):
     if is_ajax and request.method == 'POST':
@@ -29,7 +27,7 @@ def register(request):
         request.session['role'] = user.details.role
         return JsonResponse({'success': 'success', 'data': {'url': reverse('thrifts:home')}}, status=200)
     else:
-        return render(request, 'users/register.html')
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
 def profile(request, username):
@@ -60,6 +58,26 @@ def logout_user(request):
     except KeyError:
         pass
     return redirect('thrifts:home')
+
+
+def list(request):
+    users = User.objects.all()
+    return render(request, 'users/list.html', {'users': users})
+
+
+def change_role(request):
+    if is_ajax and request.method == 'POST':
+        id = request.POST.get('id')
+        role = request.POST.get('role')
+        user = User.objects.get(pk=id)
+        detail = user.details
+        detail.role = role
+        detail.save()
+        messages.add_message(request, messages.SUCCESS,
+                             "You have changed successfully.")
+        return JsonResponse({'success': 'success', 'data': {'url': reverse('users:list')}}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
 def is_ajax(request):

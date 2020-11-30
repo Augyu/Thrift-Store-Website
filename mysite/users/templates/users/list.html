@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<script src="{% static 'users/js/list.js' %}"></script>
+{% endblock css %}
+
+
+{% block container %}
+{% if request.session.role == 'admin' %}
+<div class="container py-5">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users  %}
+      <tr>
+        <td>{{user.username}}</td>
+        <td>{{user.details.role}}</td>
+        <td>
+          <select class="form-control-sm">
+            <option></option>
+            <option>regular</option>
+            <option>admin</option>
+          </select>
+          <button class="btn btn-primary btn-sm change-role-btn" data-id="{{user.id}}"
+            data-url="{% url 'users:change_role' %}">save</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="container vh-100">
+  Login to see more.
+</div>
+{% endif %}
+{% endblock container %}
