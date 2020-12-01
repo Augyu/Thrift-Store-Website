@@ -11,7 +11,4 @@ urlpatterns = [
     path('product/<int:product_id>/delete', views.delete, name='delete'),
     path('sell/', views.sell, name='sell'),
     path('seller/<seller>/', views.seller, name="seller"),
-    path('seller/<seller>/comment', views.leave_comment, name="comment"),
-    path('seller/<seller>/num_of_comment',
-         views.get_num_of_comment, name="numOfComment")
 ]

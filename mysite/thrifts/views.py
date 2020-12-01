@@ -4,7 +4,8 @@ from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from .models import Product, Comment
+from .models import Product
+from comments.models import Comment
 from feeds.models import Feed
 
 
@@ -33,7 +34,7 @@ def list(request):
 
 def detail(request, product_id):
     product = Product.objects.get(pk=product_id)
-    comments = Comment.objects.filter(seller=product.seller)
+    comments = Comment.objects.filter(seller_username=product.seller)
     context = {'product': product, 'comments': comments}
     return render(request, 'thrifts/detail.html', context)
 
@@ -100,32 +101,9 @@ def sell(request):
 
 
 def seller(request, seller):
-    comments = Comment.objects.filter(seller=seller)
+    comments = []
+    # comments = Comment.objects.filter(seller_username=seller)
     return render(request, 'thrifts/seller.html', {'comments': comments, 'name': seller})
-
-
-def leave_comment(request, seller):
-    if is_ajax and request.method == "POST":
-        comment = request.POST.get('comment')
-        seller = request.session['username']
-        comment = Comment(comment=comment, seller=seller, buyer=seller)
-        comment.save()
-        return JsonResponse({'success': 'success',
-                             'data': {'seller': comment.seller, 'buyer': comment.buyer,
-                                      'comment': comment.comment, 'date_posted': naturaltime(comment.date_posted)}},
-                            status=200)
-    else:
-        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
-
-
-def get_num_of_comment(request, seller):
-    if is_ajax and request.method == "GET":
-        number = len(Comment.objects.filter(seller=seller))
-        return JsonResponse({'success': 'success', 'data': {'number': number}}, status=200)
-    else:
-        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
-
-# check if the request is ajax
 
 
 def is_ajax(request):

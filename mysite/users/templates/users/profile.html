@@ -46,5 +46,8 @@
             {% endif %}
         </form>
     </div>
+
+    <h3 class="py-3">Comments</h3>
+    {% include 'comments/comments.html' with seller_username=user.username%}
 </div>
 {% endblock container %}

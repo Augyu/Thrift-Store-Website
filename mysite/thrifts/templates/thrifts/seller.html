@@ -13,31 +13,10 @@
 <div class="container min-vh-100 py-3">
     <div class="row">
         <div class="col-sm-12 col-md-6">
-            <h1>{{name}}</h1>
-            <button class="total-comment-btn btn btn-danger" data-url="{% url 'thrifts:numOfComment' name%}">Click to
-                see the number of comments.</button>
-            <h5 class="total-comment py-3"></h5>
+            <h1 class="seller">{{name}}</h1>
         </div>
         <div class="col-sm-12 col-md-6">
-            <div class="leave-comment-container d-flex py-3">
-                {% csrf_token %}
-                <input type="text" class="w-100" id="leave_comment" name="leave_comment"
-                    placeholder="Leave a comment" />
-                <button class="btn btn-secondary" data-url="{% url 'thrifts:comment' name %}">Send</button>
-            </div>
-            <div class="comment-container">
-                {% for comment in comments %}
-                <div class="comment">
-                    <div>
-                        <a>{{ comment.buyer }}</a>
-                        <span>{{ comment.date_posted | naturaltime }}</span>
-                    </div>
-                    <p>{{ comment.comment }}</p>
-                </div>
-
-                {% endfor %}
-            </div>
-
+            {% include 'comments/comments.html' %}
         </div>
     </div>
 </div>

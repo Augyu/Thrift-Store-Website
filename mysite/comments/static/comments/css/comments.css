@@ -1,0 +1,22 @@
+.seller {
+  padding: 8px;
+}
+
+.comment {
+  border-top: 1px solid var(--main-stone);
+  padding: 4px 0;
+}
+
+.comment div a:nth-child(1) {
+  color: var(--main-teal);
+}
+
+.comment div span:nth-child(2) {
+  float: right;
+  color: var(--main-stone);
+}
+
+.comment p:nth-child(2) {
+  font-size: 1.2rem;
+  color: var(--main-maroon);
+}

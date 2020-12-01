@@ -1,0 +1,25 @@
+{% load static %}
+{% load humanize %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'comments/css/comments.css' %}" />
+<script src="{% static 'comments/js/comments.js' %}"></script>
+
+<div class="add-comment-container d-flex">
+    {% csrf_token %}
+    <input type="text" class="w-100" id="add_comment" name="add_comment" placeholder="Leave a comment" />
+    <button class="btn btn-secondary add-comment" data-url="{% url 'comments:add' %}"
+        data-seller_username="{{ seller_username }}">Send</button>
+</div>
+<div class="comment-container">
+    {% for comment in comments %}
+    <div class="form-group my-3 comment">
+        <a href="#">{{ comment.buyer_username }}</a>
+        <span>{{ comment.date_posted | naturaltime }}</span>
+        <button class="btn btn-outline-secondary btn-sm" data-id="{{ comment.id }}">Edit</button>
+        <button class="btn btn-outline-danger btn-sm" data-id="{{ comment.id }}">Delete</button>
+        <input type="text" class="form-control" id="username" name="username" value="{{ comment.comment }}" disabled>
+    </div>
+    {% empty %}
+    <h4>There is no comment.</h4>
+    {% endfor %}
+</div>

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'thrifts.apps.ThriftsConfig',
     'users.apps.UsersConfig',
     'feeds.apps.FeedsConfig',
+    'comments.apps.CommentsConfig',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',

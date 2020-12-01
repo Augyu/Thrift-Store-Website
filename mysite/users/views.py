@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import Details
 from datetime import datetime
 from django.urls import reverse
+from comments.models import Comment
 
 
 def register(request):
@@ -51,7 +52,8 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
     birth = user.details.birth
     birth = birth.strftime("%Y-%m-%d")
-    return render(request, 'users/profile.html', {'user': user, 'birth': birth})
+    comments = Comment.objects.filter(seller_username=username)
+    return render(request, 'users/profile.html', {'user': user, 'birth': birth, 'comments': comments})
 
 
 def login_user(request):

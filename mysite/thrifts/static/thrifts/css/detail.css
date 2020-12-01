@@ -62,7 +62,7 @@
   color: white;
 }
 
-.seller {
+/* .seller {
   padding: 8px;
 }
 
@@ -83,7 +83,7 @@
 .comment p:nth-child(2) {
   font-size: 1.2rem;
   color: var(--main-maroon);
-}
+} */
 
 .modal-container {
   width: 100%;

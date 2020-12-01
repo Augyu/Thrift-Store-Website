@@ -23,13 +23,3 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('thrifts:detail', args=[self.id])
-
-
-class Comment(models.Model):
-    buyer = models.CharField(max_length=200)
-    seller = models.CharField(max_length=200)
-    comment = models.TextField(blank=True)
-    date_posted = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-    class Meta:
-        ordering = ['-date_posted']

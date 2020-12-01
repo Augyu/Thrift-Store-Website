@@ -23,7 +23,7 @@
     <p>{{ product.name }}</p>
     <p>$ {{ product.price }}</p>
     <div>
-      <a href="{% url 'thrifts:seller' product.seller %}">{{ product.seller }} (20)</a>
+      <a href="{% url 'thrifts:seller' product.seller %}">{{ product.seller }}</a>
       <p>{{ product.date_posted | naturaltime }}</p>
     </div>
     <p>
@@ -32,27 +32,8 @@
     <button id="add-cart">Add to cart</button>
     <button id="checkout">Checkout</button>
   </div>
-
-
-  {% if request.session.username %}
-  <div class="seller">
-
-    {% for comment in comments %}
-    <div class="comment">
-      <div>
-        <a>{{ comment.buyer }}</a>
-        <span>{{ comment.date_posted | naturaltime }}</span>
-      </div>
-      <p>{{ comment.comment }}</p>
-    </div>
-
-    {% endfor %}
-    {% else %}
-    <div class="seller">
-      Login to see more comments.
-    </div>
-    {% endif %}
+  <div>
+    {%include 'comments/comments.html' with seller_username=product.seller %}
   </div>
-
 </div>
 {% endblock container %}
