@@ -23,7 +23,7 @@
     <p>{{ product.name }}</p>
     <p>$ {{ product.price }}</p>
     <div>
-      <a href="{% url 'thrifts:seller' product.seller %}">{{ product.seller }}</a>
+      <a href="{% url 'users:profile' product.seller %}">{{ product.seller }}</a>
       <p>{{ product.date_posted | naturaltime }}</p>
     </div>
     <p>

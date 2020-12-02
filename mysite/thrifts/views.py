@@ -58,6 +58,9 @@ def edit(request, product_id):
                 product.img = image
             product.save()
             messages.info(request, 'You successfully edited %s' % name)
+            feed = Feed(user=user, verb='update a new product.',
+                        target=product)
+            feed.save()
             return redirect('thrifts:home')
 
         return render(request, 'thrifts/edit.html', context)

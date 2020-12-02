@@ -7,6 +7,7 @@ from .models import Details
 from datetime import datetime
 from django.urls import reverse
 from comments.models import Comment
+from feeds.models import Feed
 
 
 def register(request):
@@ -24,6 +25,8 @@ def register(request):
         detail.save()
         request.session['username'] = username
         request.session['role'] = user.details.role
+        feed = Feed(user=user, verb='has just signed up', target=user)
+        feed.save()
         return JsonResponse({'success': 'success', 'data': {'url': reverse('thrifts:home')}}, status=200)
     else:
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
@@ -66,6 +69,8 @@ def login_user(request):
         request.session['role'] = user.details.role
         messages.add_message(request, messages.SUCCESS,
                              "You have logged in successfully.")
+        feed = Feed(user=user, verb='has just sign up', target=user)
+        feed.save()
     else:
         messages.add_message(request, messages.ERROR,
                              "Invalid username or password.")
@@ -74,8 +79,11 @@ def login_user(request):
 
 def logout_user(request):
     try:
+        user = User.objects.get(username=request.session['username'])
+        feed = Feed(user=user, verb='has just logged out', target=user)
         del request.session['username']
         del request.session['role']
+        feed.save()
     except KeyError:
         pass
     return redirect('thrifts:home')
