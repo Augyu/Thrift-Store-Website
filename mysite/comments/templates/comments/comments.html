@@ -10,16 +10,22 @@
     <button class="btn btn-secondary add-comment" data-url="{% url 'comments:add' %}"
         data-seller_username="{{ seller_username }}">Send</button>
 </div>
-<div class="comment-container">
+<div class="comment-container" data-delete-url="{% url 'comments:delete' %}" data-edit-url="{% url 'comments:edit' %}">
     {% for comment in comments %}
-    <div class="form-group my-3 comment">
+    <div class="form-group my-3">
         <a href="#">{{ comment.buyer_username }}</a>
         <span>{{ comment.date_posted | naturaltime }}</span>
-        <button class="btn btn-outline-secondary btn-sm" data-id="{{ comment.id }}">Edit</button>
-        <button class="btn btn-outline-danger btn-sm" data-id="{{ comment.id }}">Delete</button>
-        <input type="text" class="form-control" id="username" name="username" value="{{ comment.comment }}" disabled>
+
+        {% if requst.session.username == comment.buyer_username or request.session.role == 'admin' %}
+        <button class="btn btn-outline-secondary btn-sm edit-comment" data-id="{{ comment.id }}">Edit</button>
+        <button class="btn btn-outline-secondary btn-sm update-comment" data-id="{{ comment.id }}">Update</button>
+        <button class="btn btn-outline-danger btn-sm delete-comment" id="delete-comment-{ {comment.id }"
+            data-id="{{ comment.id }}">Delete</button>
+        {% endif %}
+
+        <input type="text" class="form-control" name="username" value="{{ comment.comment }}" disabled>
     </div>
     {% empty %}
-    <h4>There is no comment.</h4>
+    <div class="empty-container">There is no comment.</div>
     {% endfor %}
 </div>

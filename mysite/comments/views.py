@@ -26,5 +26,25 @@ def add_comment(request):
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
+def delete_comment(request):
+    if is_ajax and request.method == 'POST':
+        comment_id = request.POST.get('id')
+        Comment.objects.get(pk=comment_id).delete()
+        return JsonResponse({'success': 'success'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+
+
+def edit_comment(request):
+    if is_ajax and request.method == 'POST':
+        comment_id = request.POST.get('id')
+        comment = Comment.objects.get(pk=comment_id)
+        comment.comment = request.POST.get('comment')
+        comment.save()
+        return JsonResponse({'success': 'success'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+
+
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'

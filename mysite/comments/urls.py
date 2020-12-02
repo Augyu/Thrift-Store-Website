@@ -4,6 +4,6 @@ from . import views
 app_name = 'comments'
 urlpatterns = [
     path('add', views.add_comment, name='add'),
-    # path('<int:comment_id>/edit', views.edit_comment, name='edit'),
-    # path('<int:comment_id>/delete', views.delete, name='delete'),
+    path('edit', views.edit_comment, name='edit'),
+    path('delete', views.delete_comment, name='delete'),
 ]

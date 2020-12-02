@@ -48,6 +48,16 @@
     </div>
 
     <h3 class="py-3">Comments</h3>
-    {% include 'comments/comments.html' with seller_username=user.username%}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                {% include 'comments/comments.html' with seller_username=user.username%}
+            </div>
+            <div class="col-sm-12 col-md-6">
+                {% include 'feeds/feeds.html'%}
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock container %}
