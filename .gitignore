@@ -4,3 +4,4 @@
 mysite/media/**
 mysite/venv/**
 mysite/.gitignore
+mysite/mysite/.env
