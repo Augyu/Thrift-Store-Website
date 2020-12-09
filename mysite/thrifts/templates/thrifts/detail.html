@@ -8,32 +8,30 @@
 {% endblock css %}
 
 {% block container %}
-<div class="product-container">
-  <div class="product__image">
-    <div class="product__image--large">
-      <img src="{{ product.img.url }}" alt="image-large" />
+<div class="product-container container-fluid">
+  <div class="row">
+    <div class="product__image col-sm-12 col-md-4">
+      <div class="product__image--large">
+        <img src="{{ product.img.url }}" alt="image-large" />
+      </div>
     </div>
-    <!-- <div class="product__image--small">
-      <img src="{{ product.img.url }}" alt="image-small" />
-      <img src="{{ product.img.url }}" alt="image-small" />
-      <img src="{{ product.img.url }}" alt="image-small" />
-    </div> -->
-  </div>
-  <div class="product__description">
-    <p>{{ product.name }}</p>
-    <p>$ {{ product.price }}</p>
-    <div>
-      <a href="{% url 'users:profile' product.seller %}">{{ product.seller }}</a>
-      <p>{{ product.date_posted | naturaltime }}</p>
+    <div class="product__description col-sm-12 col-md-4">
+      <p>{{ product.name }}</p>
+      <p>$ {{ product.price }}</p>
+      <div>
+        <a href="{% url 'users:profile' product.user.username %}">{{ product.user.username }}</a>
+        <p>{{ product.date_posted | naturaltime }}</p>
+      </div>
+      <p>
+        {{ product.description }}
+      </p>
+      <button id="add-cart">Add to cart</button>
+      <button id="checkout">Checkout</button>
     </div>
-    <p>
-      {{ product.description }}
-    </p>
-    <button id="add-cart">Add to cart</button>
-    <button id="checkout">Checkout</button>
+    <div class="col-sm-12 col-md-4">
+      {%include 'comments/comments.html' with seller_username=product.seller %}
+    </div>
   </div>
-  <div>
-    {%include 'comments/comments.html' with seller_username=product.seller %}
-  </div>
+
 </div>
 {% endblock container %}

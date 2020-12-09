@@ -43,7 +43,8 @@
           <div class="userbar__dropdown-content">
 
             {% if request.session.username %}
-            <a href="{% url 'thrifts:home' %}">My Account</a>
+            <a href="{% url 'thrifts:home' %}">Dashboard</a>
+            <a href="{% url 'users:profile' request.session.username %}">My Profile</a>
             <a href="{% url 'thrifts:sell' %}">Sell a thing</a>
             <a href="{% url 'users:logout' %}">Logout</a>
             {% else %}
@@ -57,7 +58,8 @@
           <img src="{% static 'image/icon/hambars.svg' %}" alt="menu" />
           <div class="hambar__dropdown-content">
             {% if request.session.username %}
-            <a href="#">My Account</a>
+            <a href="#">Dashboard</a>
+            <a href="{% url 'users:profile' request.session.username %}">My Profile</a>
             <a href="add.html">Sell a thing</a>
             <a href="{% url 'users:logout' %}">Logout</a>
             {% else %}

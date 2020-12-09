@@ -54,6 +54,7 @@ def edit(request, product_id):
             product.price = price
             product.description = description
             product.category = category
+            user = User.objects.get(username=request.session.get('username'))
             if image:
                 product.img = image
             product.save()

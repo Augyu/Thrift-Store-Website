@@ -137,6 +137,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+if not os.path.isdir(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT, mode=0o755)
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]

@@ -11,25 +11,28 @@ from feeds.models import Feed
 
 
 def register(request):
-    if is_ajax and request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        first_name = request.POST.get('fName')
-        last_name = request.POST.get('lName')
-        birth = request.POST.get('birth')
-        user = User.objects.create_user(
-            username, email, password, first_name=first_name, last_name=last_name)
-        detail = Details.objects.get(user_id=user.id)
-        detail.birth = datetime.strptime(birth, '%Y-%m-%d')
-        detail.save()
-        request.session['username'] = username
-        request.session['role'] = user.details.role
-        feed = Feed(user=user, verb='has just signed up', target=user)
-        feed.save()
-        return JsonResponse({'success': 'success', 'data': {'url': reverse('thrifts:home')}}, status=200)
+    if request.method == 'POST':
+        if is_ajax:
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            first_name = request.POST.get('fName')
+            last_name = request.POST.get('lName')
+            birth = request.POST.get('birth')
+            user = User.objects.create_user(
+                username, email, password, first_name=first_name, last_name=last_name)
+            detail = Details.objects.get(user_id=user.id)
+            detail.birth = datetime.strptime(birth, '%Y-%m-%d')
+            detail.save()
+            request.session['username'] = username
+            request.session['role'] = user.details.role
+            feed = Feed(user=user, verb='has just signed up', target=user)
+            feed.save()
+            return JsonResponse({'success': 'success', 'data': {'url': reverse('thrifts:home')}}, status=200)
+        else:
+            return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
     else:
-        return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
+        return render(request, 'users/register.html')
 
 
 def edit(request, username):

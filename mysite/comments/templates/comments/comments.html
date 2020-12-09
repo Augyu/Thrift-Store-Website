@@ -13,13 +13,12 @@
 <div class="comment-container" data-delete-url="{% url 'comments:delete' %}" data-edit-url="{% url 'comments:edit' %}">
     {% for comment in comments %}
     <div class="form-group my-3">
-        <a href="#">{{ comment.buyer_username }}</a>
+        <a href="{% url 'users:profile' comment.buyer_username %}">{{ comment.buyer_username }}</a>
         <span>{{ comment.date_posted | naturaltime }}</span>
-
-        {% if requst.session.username == comment.buyer_username or request.session.role == 'admin' %}
+        {% if request.session.username == comment.buyer_username or request.session.role == 'admin' %}
         <button class="btn btn-outline-secondary btn-sm edit-comment" data-id="{{ comment.id }}">Edit</button>
         <button class="btn btn-outline-secondary btn-sm update-comment" data-id="{{ comment.id }}">Update</button>
-        <button class="btn btn-outline-danger btn-sm delete-comment" id="delete-comment-{ {comment.id }"
+        <button class="btn btn-outline-danger btn-sm delete-comment" id="delete-comment-{{comment.id }}"
             data-id="{{ comment.id }}">Delete</button>
         {% endif %}
 
