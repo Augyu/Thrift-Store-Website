@@ -4,9 +4,11 @@ from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from google.cloud import vision
 from .models import Product
 from comments.models import Comment
 from feeds.models import Feed
+import json
 
 
 def home(request):
@@ -92,14 +94,21 @@ def sell(request):
         image = request.FILES.get('image')
         seller = request.session['username']
         user = User.objects.get(username=request.session.get('username'))
-        product = Product(name=name, price=price, img=image,
-                          description=description, category=category, seller=seller, user=user)
-        product.save()
-        messages.success(request, 'You successfully added %s' % name)
-        # log the feed
-        feed = Feed(user=user, verb='created a new product.', target=product)
-        feed.save()
-        return redirect('thrifts:detail', product.id)
+
+        if image_safe_search(image):
+            product = Product(name=name, price=price, img=image,
+                              description=description, category=category, seller=seller, user=user)
+            product.save()
+            messages.success(request, 'You successfully added %s' % name)
+            # log the feed
+            feed = Feed(user=user, verb='created a new product.',
+                        target=product)
+            feed.save()
+            return redirect('thrifts:detail', product.id)
+        else:
+            messages.warning(
+                request, 'You picture might be appropriate, please upload another one.')
+            return render(request, 'thrifts/add.html')
 
     return render(request, 'thrifts/add.html')
 
@@ -108,6 +117,30 @@ def seller(request, seller):
     comments = []
     # comments = Comment.objects.filter(seller_username=seller)
     return render(request, 'thrifts/seller.html', {'comments': comments, 'name': seller})
+
+
+def image_safe_search(image):
+    client = vision.ImageAnnotatorClient()
+    gcp_image = vision.Image(content=image.read())
+    response = client.safe_search_detection(image=gcp_image)
+
+    safe = response.safe_search_annotation
+
+    # Names of likelihood from google.cloud.vision.enums
+    likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
+                       'LIKELY', 'VERY_LIKELY')
+
+    if response.error.message:
+        return False
+
+    if likelihood_name[safe.adult] == 'LIKELY' or likelihood_name[safe.adult] == 'VERY_LIKELY' or\
+            likelihood_name[safe.medical] == 'LIKELY' or likelihood_name[safe.medical] == 'VERY_LIKELY' or\
+            likelihood_name[safe.spoof] == 'LIKELY' or likelihood_name[safe.spoof] == 'VERY_LIKELY' or\
+            likelihood_name[safe.violence] == 'LIKELY' or likelihood_name[safe.violence] == 'VERY_LIKELY' or\
+            likelihood_name[safe.racy] == 'LIKELY' or likelihood_name[safe.racy] == 'VERY_LIKELY':
+        return False
+    else:
+        return True
 
 
 def is_ajax(request):
