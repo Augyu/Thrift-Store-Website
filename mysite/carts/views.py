@@ -51,5 +51,20 @@ def cart(request):
     return render(request, 'carts/home.html')
 
 
+def delete_from_cart(request, shopping_cart, product):
+    shopping_cart = ShoppingCart.objects.get(id=shopping_cart)
+    delete_item = CartItem.objects.get(
+        shopping_cart=shopping_cart, product=product)
+    shopping_cart.price = shopping_cart.price - delete_item.product.price
+    shopping_cart.save()
+    delete_item.delete()
+
+    cart_item = CartItem.objects.filter(shopping_cart=shopping_cart)
+    if not cart_item:
+        shopping_cart.delete()
+
+    return render(request, 'carts/home.html', {'cart_item': cart_item})
+
+
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'

@@ -17,3 +17,6 @@ class CartItem(models.Model):
 
     class Meta:
         unique_together = ('shopping_cart', 'product')
+
+    def __str__(self):
+        return self.product.name

@@ -21,7 +21,7 @@
             <div>{{ item.product.price }}</div>
           </div>
           <div class="col d-flex  align-items-center justify-content-end">
-            <a href="" class="btn btn-danger">Remove</a>
+            <a href="{% url 'carts:delete' item.shopping_cart.id  item.product.id %}" class="btn btn-danger">Remove</a>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
       {% endfor %}
     </div>
     <div class="col-sm-12 col-md-4">
-
+      {{ cart_item.0.shopping_cart.price }}
     </div>
   </div>
 
