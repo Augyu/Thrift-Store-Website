@@ -8,6 +8,7 @@
 {% endblock css %}
 
 {% block container %}
+{% csrf_token %}
 <div class="product-container container-fluid">
   <div class="row">
     <div class="product__image col-sm-12 col-md-4">
@@ -25,7 +26,7 @@
       <p>
         {{ product.description }}
       </p>
-      <button id="add-cart">Add to cart</button>
+      <button id="add-cart" data-url="{% url 'carts:add' %}" data-product-id="{{ product.id }}">Add to cart</button>
       <button id="checkout">Checkout</button>
     </div>
     <div class="col-sm-12 col-md-4">

@@ -14,6 +14,7 @@ class Product(models.Model):
     category = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
+    is_sold = models.BooleanField()
 
     class Meta:
         ordering = ['date_posted']

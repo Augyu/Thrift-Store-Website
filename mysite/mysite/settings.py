@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'feeds.apps.FeedsConfig',
     'comments.apps.CommentsConfig',
+    'carts.apps.CartsConfig',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
