@@ -38,6 +38,8 @@ def list(request):
         products = Product.objects.filter(category=category)
     if sorting_type:
         products = products.order_by(sorting_type)
+    if product == None:
+        product = ""
     return render(request, 'thrifts/list.html', {'sorting': sorting_type, 'name': product, 'products': products})
 
 

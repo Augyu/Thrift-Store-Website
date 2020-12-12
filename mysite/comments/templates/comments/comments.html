@@ -4,12 +4,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'comments/css/comments.css' %}" />
 <script src="{% static 'comments/js/comments.js' %}"></script>
 
+{% if request.session.username %}
 <div class="add-comment-container d-flex">
     {% csrf_token %}
     <input type="text" class="w-100" id="add_comment" name="add_comment" placeholder="Leave a comment" />
     <button class="btn btn-secondary add-comment" data-url="{% url 'comments:add' %}"
         data-seller_username="{{ seller_username }}">Send</button>
 </div>
+{% endif %}
+
 <div class="comment-container" data-delete-url="{% url 'comments:delete' %}" data-edit-url="{% url 'comments:edit' %}">
     {% for comment in comments %}
     <div class="form-group my-3">

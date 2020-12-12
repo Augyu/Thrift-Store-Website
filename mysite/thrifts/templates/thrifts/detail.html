@@ -26,8 +26,12 @@
       <p>
         {{ product.description }}
       </p>
+
+      {% if request.session.username %}
       <button id="add-cart" data-url="{% url 'carts:add' %}" data-product-id="{{ product.id }}">Add to cart</button>
       <button id="checkout">Checkout</button>
+      {% endif %}
+
     </div>
     <div class="col-sm-12 col-md-4">
       {%include 'comments/comments.html' with seller_username=product.seller %}

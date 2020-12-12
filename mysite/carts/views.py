@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import ShoppingCart, CartItem
 from thrifts.models import Product
@@ -37,7 +37,7 @@ def add_to_cart(request):
 
 
 def cart(request):
-    if request.method == 'GET':
+    if request.method == 'GET' and request.session.get('username'):
         username = request.session.get('username')
         user = User.objects.get(username=username)
         try:
@@ -63,7 +63,8 @@ def delete_from_cart(request, shopping_cart, product):
     if not cart_item:
         shopping_cart.delete()
 
-    return render(request, 'carts/home.html', {'cart_item': cart_item})
+    return redirect('carts:home')
+    # return render(request, 'carts/home.html', {'cart_item': cart_item})
 
 
 def is_ajax(request):
