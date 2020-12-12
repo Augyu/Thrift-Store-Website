@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'carts/css/home.css' %}" />
+<script src="{% static 'thrifts/js/add.js' %}"></script>
+{% endblock css %}
+{% block container %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="title">Your Cart</div>
+      {% for item in cart_item %}
+      <div class="cart-item container-fluid">
+        <div class="row">
+          <a href="{% url 'thrifts:detail' item.product.id %}" class="col">
+            <img src="{{ item.product.img.url }} " alt="snapshot" class="img-thumbnail" />
+          </a>
+          <div class="col d-flex flex-column justify-content-center">
+            <div>{{ item.product.name }}</div>
+            <div>{{ item.product.price }}</div>
+          </div>
+          <div class="col d-flex  align-items-center justify-content-end">
+            <a href="" class="btn btn-danger">Remove</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div>Your cart is empty.</div>
+      {% endfor %}
+    </div>
+    <div class="col-sm-12 col-md-4">
+
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock container %}

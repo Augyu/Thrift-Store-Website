@@ -271,6 +271,13 @@ img {
   min-height: 75vh;
 }
 
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 16px 0px;
+  color: var(--main-maroon);
+}
+
 @media screen and (min-width: 768px) {
   .main-header__middle input[type='text'] {
     display: block;
@@ -284,7 +291,7 @@ img {
     display: inline-block;
   }
 
-  .main-header__right a img:first-child {
+  .main-header__right a:first-child img:first-child {
     display: none;
   }
 

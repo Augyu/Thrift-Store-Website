@@ -1,0 +1,15 @@
+.cart-item img {
+  object-fit: cover;
+  height: 100px;
+  width: 100px;
+}
+
+.cart-item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 16px 0;
+}
+
+.cart-item:hover {
+  background-color: rgb(232, 232, 232);
+}

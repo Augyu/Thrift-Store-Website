@@ -36,5 +36,20 @@ def add_to_cart(request):
         return JsonResponse({'error': 'Invalid Ajax Request'}, status=400)
 
 
+def cart(request):
+    if request.method == 'GET':
+        username = request.session.get('username')
+        user = User.objects.get(username=username)
+        try:
+            shopping_cart = ShoppingCart.objects.get(user=user)
+            cart_item = CartItem.objects.filter(shopping_cart=shopping_cart)
+            return render(request, 'carts/home.html', {'cart_item': cart_item})
+
+        except:
+            return render(request, 'carts/home.html')
+
+    return render(request, 'carts/home.html')
+
+
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
