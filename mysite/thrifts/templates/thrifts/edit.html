@@ -29,11 +29,13 @@
       </div>
       <div>
         <label for="category">Category</label>
-        <select name="category" data-selected="{{ product.category }}">
+        <select name="category" data-selected="{{ product.category }}" class="product-category">
           <option value=""></option>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
-          <option value="sports">Sports</option>
+          <option id="electronics" value="electronics">Electronics</option>
+          <option id="fashion" value="fashion">Fashion</option>
+          <option id="food" value="food">Food</option>
+          <option id="home_decoration" value="home_decorations">Home Decorations</option>
+          <option id="sports" value="sports">Sports</option>
         </select>
       </div>
       <div>

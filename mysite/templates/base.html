@@ -24,10 +24,11 @@
         <a href="{% url 'thrifts:home' %}"><img src="{% static 'image/logo-white.png' %}" alt="logo" /></a>
       </div>
       <div class="main-header__middle">
-        <form action="{% url 'thrifts:list' %}" method="get">
           {% csrf_token %}
+
+        <form action="{% url 'thrifts:list' %}" method="get">
           <label for="search-middle"></label>
-          <input type="text" placeholder="Search for goods" id="search-middle" name="search" required />
+          <input type="text" placeholder="Search for goods" id="search-middle" name="product" value="{{ name }}" required />
           <input type="submit" value="" />
         </form>
       </div>
@@ -72,10 +73,11 @@
   </header>
   <div class="menu-bar">
     <ol>
-      <li><a href="{% url 'thrifts:list' %}">Electonics</a></li>
-      <li><a href="{% url 'thrifts:list' %}">Fashion</a></li>
-      <li><a href="{% url 'thrifts:list' %}">Sports</a></li>
-      <li><a href="{% url 'thrifts:list' %}">Home Decoration</a></li>
+      <li><a href="{% url 'thrifts:list' %}?category=electronics">Electonics</a></li>
+      <li><a href="{% url 'thrifts:list' %}?category=fashion">Fashion</a></li>
+      <li><a href="{% url 'thrifts:list' %}?category=food">Food</a></li>
+      <li><a href="{% url 'thrifts:list' %}?category=home_decorations">Home Decorations</a></li>
+      <li><a href="{% url 'thrifts:list' %}?category=sports">Sports</a></li>
     </ol>
   </div>
   <!-- main content -->

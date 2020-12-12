@@ -25,7 +25,7 @@
       <section class="selling container-fluid" data-delete-url="{% url 'thrifts:delete' selling.id %}">
         <div class="row">
           <div class="col-3">
-            <img src="{{ selling.img.url }} " alt="selling-snapshot">
+            <img src="{{ selling.img.url }} " alt="selling-snapshot" class="img-thumbnail">
           </div>
           <div class="col-6">
             <h4>{{ selling.name }}</h4>

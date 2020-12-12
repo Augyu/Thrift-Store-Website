@@ -1,11 +1,19 @@
 $(document).ready(function () {
   getProductBySorting()
+
+  var sorting = $('#product-sorting').attr('data-selected')
+  $('#' + sorting).attr('selected', true)
 })
 
 function getProductBySorting() {
   $('#product-sorting').on('change', function () {
     const type = this.value
-    var url = $(this).data('url') + '?sorting=' + type
+    var url = window.location.href
+    if (url.includes('sorting')) {
+      url = url.replace(/(sorting=)[^\&]+/, '$1' + type)
+    } else {
+      url = url + '&sorting=' + type
+    }
     window.location.href = url
   })
 }

@@ -8,7 +8,8 @@ from google.cloud import vision
 from .models import Product
 from comments.models import Comment
 from feeds.models import Feed
-import json
+
+GCP_RESULT = {'safe': 1, 'unsafe': 0, 'error': -1}
 
 
 def home(request):
@@ -26,12 +27,18 @@ def home(request):
 
 
 def list(request):
+    products = Product.objects.all()
     sorting_type = request.GET.get('sorting')
+    category = request.GET.get('category')
+    product = request.GET.get('product')
+
+    if product:
+        products = Product.objects.filter(name__icontains=product)
+    if category:
+        products = Product.objects.filter(category=category)
     if sorting_type:
-        products = Product.objects.all().order_by(sorting_type)
-    else:
-        products = Product.objects.all()
-    return render(request, 'thrifts/list.html', {'products': products})
+        products = products.order_by(sorting_type)
+    return render(request, 'thrifts/list.html', {'sorting': sorting_type, 'name': product, 'products': products})
 
 
 def detail(request, product_id):
@@ -58,7 +65,17 @@ def edit(request, product_id):
             product.category = category
             user = User.objects.get(username=request.session.get('username'))
             if image:
-                product.img = image
+                is_safe = image_safe_search(image)
+                if is_safe == GCP_RESULT['safe']:
+                    product.img = image
+                elif is_safe == GCP_RESULT['unsafe']:
+                    messages.warning(
+                        request, 'You picture might be appropriate, please upload another one.')
+                    return render(request, 'thrifts/edit.html', context)
+                elif is_safe == GCP_RESULT['error']:
+                    messages.warning(
+                        request, 'The image detector is not working right now, please try again later.')
+                    return render(request, 'thrifts/edit.html', context)
             product.save()
             messages.info(request, 'You successfully edited %s' % name)
             feed = Feed(user=user, verb='update a new product.',
@@ -94,8 +111,8 @@ def sell(request):
         image = request.FILES.get('image')
         seller = request.session['username']
         user = User.objects.get(username=request.session.get('username'))
-
-        if image_safe_search(image):
+        is_safe = image_safe_search(image)
+        if is_safe == GCP_RESULT['safe']:
             product = Product(name=name, price=price, img=image,
                               description=description, category=category, seller=seller, user=user)
             product.save()
@@ -105,9 +122,13 @@ def sell(request):
                         target=product)
             feed.save()
             return redirect('thrifts:detail', product.id)
-        else:
+        elif is_safe == GCP_RESULT['unsafe']:
             messages.warning(
                 request, 'You picture might be appropriate, please upload another one.')
+            return render(request, 'thrifts/add.html')
+        elif is_safe == GCP_RESULT['error']:
+            messages.warning(
+                request, 'The image detector is not working right now, please try again later.')
             return render(request, 'thrifts/add.html')
 
     return render(request, 'thrifts/add.html')
@@ -131,16 +152,16 @@ def image_safe_search(image):
                        'LIKELY', 'VERY_LIKELY')
 
     if response.error.message:
-        return False
+        return -1
 
     if likelihood_name[safe.adult] == 'LIKELY' or likelihood_name[safe.adult] == 'VERY_LIKELY' or\
             likelihood_name[safe.medical] == 'LIKELY' or likelihood_name[safe.medical] == 'VERY_LIKELY' or\
             likelihood_name[safe.spoof] == 'LIKELY' or likelihood_name[safe.spoof] == 'VERY_LIKELY' or\
             likelihood_name[safe.violence] == 'LIKELY' or likelihood_name[safe.violence] == 'VERY_LIKELY' or\
             likelihood_name[safe.racy] == 'LIKELY' or likelihood_name[safe.racy] == 'VERY_LIKELY':
-        return False
+        return 0
     else:
-        return True
+        return 1
 
 
 def is_ajax(request):

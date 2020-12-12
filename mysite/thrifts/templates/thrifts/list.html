@@ -59,50 +59,53 @@
         <!-- sorting bar -->
         <div class="sorting">
           <span>{{ products.count }} Results</span>
+
           <form>
             <label for="sorting">Sorted by</label>
-            <select name="sorting" id="product-sorting" data-url="{% url 'thrifts:list' %}">
+            <select name="sorting" id="product-sorting" data-selected="{{ sorting }}">
               <option value=""></option>
-              <option value="price">Cheapest</option>
-              <option value="date_posted">Most Recent</option>
+              <option value="price" id='price'>Price: Low to High</option>
+              <option value="-price" id='-price'>Price: High to Low</option>
+              <option value="-date_posted" id='-date_posted'>Most Recent</option>
             </select>
           </form>
         </div>
 
         <!-- List of product -->
-        <div class="product-list mb-3">
-          {% if products %}
-          {% for product in products %}
-          <div class="product-container">
-            <!-- product pictuer on the left, description on the right -->
-            <div class="product-left">
-              <a href="{% url 'thrifts:detail' product.id %}"><img src="{{ product.img.url }} " alt="snapshot" /></a>
+        <div class="product-list mb-3 container-fluid">
+          <div class="row">
+            {% for product in products %}
+            <div class="product-container col-sm-12 col-md-4">
+              <!-- product pictuer on the left, description on the right -->
+              <a href="{% url 'thrifts:detail' product.id %}"><img src="{{ product.img.url }} " alt="snapshot"
+                  class="img-thumbnail" /></a>
+              <div class="product-info container">
+                <a href="{% url 'thrifts:detail' product.id %}"><span>{{ product.name }}</span></a>
+                <div class="product-info__price">${{ product.price }}</div>
+                <div class="product-info__description">{{ product.description | truncatewords:15 }}</div>
+                <a href="{% url 'users:profile' product.user.username %}">{{ product.user.username }} </a>
+                <div class="product-info__date">{{ product.date_posted | naturaltime }}</div>
+              </div>
             </div>
-            <div class="product-right">
-              <span>{{ product.name }}</span>
-              <span>${{ product.price }}</span>
-              <span>{{ product.description | truncatewords:15 }}</span>
-              <a href="{% url 'users:profile' product.user.username %}">{{ product.user.username }} </a>
-              <span>{{ product.date_posted | naturaltime }}</span>
+            {% empty %}
+            <div class="product-container">
+              There is no product right now. Come back later!
             </div>
+            {% endfor %}
           </div>
-          {% endfor %}
-          {% else %}
-          <div class="product-container">
-            There is no product right now. Come back later!
-          </div>
-          {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- advertise -->
-    <div class="col-md-2">
-      <div class="right-container">
-        <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
-        <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
-      </div>
+  </div>
+
+  <!-- advertise -->
+  <div class="col-md-2">
+    <div class="right-container">
+      <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
+      <img src="{% static 'image/advertisement.jpg' %}" alt="advertisement" />
     </div>
   </div>
+</div>
 </div>
 {% endblock container %}
