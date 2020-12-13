@@ -26,5 +26,6 @@ urlpatterns = [
     path('feeds/', include('feeds.urls', namespace="feeds")),
     path('comments/', include('comments.urls', namespace="comments")),
     path('carts/', include('carts.urls', namespace="carts")),
+    path('orders/', include('orders.urls', namespace="orders")),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

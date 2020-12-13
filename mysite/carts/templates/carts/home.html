@@ -38,7 +38,7 @@
         <div class="subtitle">Total Price</div>
         <div class="subtitle text-right">{{ cart_item.0.shopping_cart.price }}</div>
       </div>
-      <a class="btn btn-secondary">Check Out</a>
+      <a href="{% url 'orders:add' cart_item.0.shopping_cart.id %}" class="btn btn-secondary">Check Out</a>
       {% endif %}
     </div>
 

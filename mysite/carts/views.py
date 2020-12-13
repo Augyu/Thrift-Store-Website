@@ -46,7 +46,7 @@ def cart(request):
             return render(request, 'carts/home.html', {'cart_item': cart_item})
 
         except:
-            return render(request, 'carts/home.html')
+            return render(request, 'carts/home.html', {})
 
     return render(request, 'carts/home.html')
 
