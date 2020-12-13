@@ -12,7 +12,11 @@ function getProductBySorting() {
     if (url.includes('sorting')) {
       url = url.replace(/(sorting=)[^\&]+/, '$1' + type)
     } else {
-      url = url + '&sorting=' + type
+      if (url.slice(-1) === '/') {
+        url = url + '?sorting=' + type
+      } else {
+        url = url + '&sorting=' + type
+      }
     }
     window.location.href = url
   })

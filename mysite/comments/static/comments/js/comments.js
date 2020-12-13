@@ -29,7 +29,7 @@ function handleAddComment() {
         .done(function (json) {
           if (json.success) {
             const data = json.data
-            $('#leave_comment').val('')
+            $('#add_comment').val('')
             $('.comment-container').prepend(
               '<div class="form-group my-3 comment"><a href="' +
                 data.buyer_url +

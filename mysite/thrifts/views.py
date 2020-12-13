@@ -31,11 +31,11 @@ def list(request):
     sorting_type = request.GET.get('sorting')
     category = request.GET.get('category')
     product = request.GET.get('product')
-
+    products = Product.objects.filter(is_sold=False)
     if product:
-        products = Product.objects.filter(name__icontains=product)
+        products = products.filter(name__icontains=product)
     if category:
-        products = Product.objects.filter(category=category)
+        products = products.filter(category=category)
     if sorting_type:
         products = products.order_by(sorting_type)
     if product == None:
@@ -116,7 +116,7 @@ def sell(request):
         is_safe = image_safe_search(image)
         if is_safe == GCP_RESULT['safe']:
             product = Product(name=name, price=price, img=image,
-                              description=description, category=category, seller=seller, user=user)
+                              description=description, category=category, seller=seller, user=user, is_sold=False)
             product.save()
             messages.success(request, 'You successfully added %s' % name)
             # log the feed

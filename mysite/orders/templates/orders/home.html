@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'carts/css/home.css' %}" />
+{% endblock css %}
+{% block container %}
+<div class="container">
+    <div class="title sm-top">My Order</div>
+    {% for order in orders %}
+    <div class="order card p-3">
+
+        <div class="subtitle">Order ID: {{ order.order_id }}</div>
+        <div>Price: {{ order.price }}</div>
+
+        {% for item in order.items  %}
+        <a href="{% url 'thrifts:detail' item.id %}" class="btn btn-outline-secondary">{{ item.name }}</a>
+        {% endfor %}
+
+    </div>
+    {% empty %}
+    <div class="subtitle">You have no order.</div>
+    {% endfor %}
+
+</div>
+
+{% endblock container %}

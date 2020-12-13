@@ -26,10 +26,9 @@
       <p>
         {{ product.description }}
       </p>
-
-      {% if request.session.username %}
+      {% if request.session.username and not product.is_sold %}
       <button id="add-cart" data-url="{% url 'carts:add' %}" data-product-id="{{ product.id }}">Add to cart</button>
-      <button id="checkout">Checkout</button>
+
       {% endif %}
 
     </div>

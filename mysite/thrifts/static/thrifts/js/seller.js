@@ -6,7 +6,7 @@ $(document).ready(function () {
 function handleLeaveComment() {
   $('.leave-comment-container button').click(function (event) {
     event.preventDefault()
-    const comment = $('#leave_comment').val()
+    const comment = $('#add_comment').val()
     const data = { comment: comment }
     var url = $(this).data('url')
     if (comment) {
@@ -20,7 +20,7 @@ function handleLeaveComment() {
         .done(function (json) {
           if (json.success) {
             const data = json.data
-            $('#leave_comment').val('')
+            $('#add_comment').val('')
             $('.comment-container').prepend(
               '<div class="comment"><div><a>' +
                 data.buyer +

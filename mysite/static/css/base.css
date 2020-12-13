@@ -19,6 +19,10 @@ img {
   display: block;
 }
 
+.sm-top {
+  margin: 55px 0 0 0;
+}
+
 .main-header {
   position: fixed;
   top: 0;
@@ -279,6 +283,9 @@ img {
 }
 
 @media screen and (min-width: 768px) {
+  .sm-top {
+    margin: 0;
+  }
   .main-header__middle input[type='text'] {
     display: block;
   }

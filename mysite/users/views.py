@@ -59,7 +59,8 @@ def profile(request, username):
     birth = user.details.birth
     birth = birth.strftime("%Y-%m-%d")
     comments = Comment.objects.filter(seller_username=username)
-    return render(request, 'users/profile.html', {'user': user, 'birth': birth, 'comments': comments})
+    feeds = Feed.objects.filter(user=user).order_by('-created_time')[:10]
+    return render(request, 'users/profile.html', {'user': user, 'birth': birth, 'comments': comments, "feeds": feeds})
 
 
 def login_user(request):
@@ -72,7 +73,7 @@ def login_user(request):
         request.session['role'] = user.details.role
         messages.add_message(request, messages.SUCCESS,
                              "You have logged in successfully.")
-        feed = Feed(user=user, verb='has just sign up', target=user)
+        feed = Feed(user=user, verb='has just logged in', target=user)
         feed.save()
     else:
         messages.add_message(request, messages.ERROR,

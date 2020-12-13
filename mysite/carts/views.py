@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import ShoppingCart, CartItem
 from thrifts.models import Product
+from django.contrib import messages
 
 # add item to the shopping cart
 # 1. check if there is a shopping cart for the current user,
@@ -62,7 +63,7 @@ def delete_from_cart(request, shopping_cart, product):
     cart_item = CartItem.objects.filter(shopping_cart=shopping_cart)
     if not cart_item:
         shopping_cart.delete()
-
+    messages.success(request, 'You successfully delete an item')
     return redirect('carts:home')
     # return render(request, 'carts/home.html', {'cart_item': cart_item})
 

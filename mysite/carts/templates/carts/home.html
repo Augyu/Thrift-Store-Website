@@ -3,13 +3,12 @@
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'carts/css/home.css' %}" />
-<script src="{% static 'thrifts/js/add.js' %}"></script>
 {% endblock css %}
 {% block container %}
 <div class="container">
 
   {% if request.session.role %}
-  <div class="title">Your Cart</div>
+  <div class="title sm-top">Your Cart</div>
 
   <div class="row">
     <div class="col-sm-12 col-md-8">

@@ -3,9 +3,10 @@
 
 <div class="container-fluid">
     {% for feed in feeds  %}
-    <li><a href="{{  feed.user.get_absolute_url }}">{{ feed.user.username }}</a> {{ feed.verb }}<a
-            href="{{ feed.target.get_absolute_url }}">{{ feed.target }}</a>
-        {{ feed.created_time | naturaltime }}</li>
+    <li><a href="{{  feed.user.get_absolute_url }}">{{ feed.user.username }}</a> {{ feed.verb }}
+        <a href="{{ feed.target.get_absolute_url }}">{{ feed.target }}</a>
+
+        , {{ feed.created_time | naturaltime }}</li>
     {% empty %}
     <li>No recent feed.</li>
     {% endfor %}
