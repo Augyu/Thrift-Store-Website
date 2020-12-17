@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 function setDeleteModalId() {
   $('.selling').on('click', '.selling-delete', function () {
-    var url = $('.selling').data('delete-url')
+    var url = $(this).parent().parent().parent().data('delete-url')
     $('#confirmDeleteModal').data('url', url)
   })
 }
